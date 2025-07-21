@@ -7,6 +7,7 @@ import '../modules/contents/contents_routes.dart';
 import '../modules/dashboard/dashboard_routes.dart';
 import '../modules/feed/feed_routes.dart';
 import '../modules/materials/materials_routes.dart';
+import '../modules/notifications/notifications_routes.dart';
 import '../modules/people/people_routes.dart';
 import '../modules/saude/saude_routes.dart';
 import '../modules/splash/splash_routes.dart';
@@ -27,5 +28,6 @@ class AppPages {
     ...PeopleRoutes.routes,
     ...saudeRoutes,
     ...feedRoutes,
+    ...notificationsRoutes,
   ];
 }
