@@ -13,7 +13,7 @@ class ProfessorViewWidget extends StatelessWidget {
     return Center(
       child: Card(
         margin: const EdgeInsets.all(32),
-        elevation: 0,
+        elevation: 2,
         color: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
         child: Padding(

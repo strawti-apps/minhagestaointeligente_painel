@@ -26,7 +26,7 @@ class AlunosListWidget extends StatelessWidget {
                     maxWidth: 380,
                   ),
                   child: Card(
-                    elevation: 0,
+                    elevation: 2,
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14),

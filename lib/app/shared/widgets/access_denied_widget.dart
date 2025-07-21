@@ -10,7 +10,8 @@ class AccessDeniedWidget extends StatelessWidget {
   const AccessDeniedWidget({
     super.key,
     this.message = 'Acesso Negado',
-    this.description = 'Você não tem permissão para acessar esta área do sistema.',
+    this.description =
+        'Você não tem permissão para acessar esta área do sistema.',
     this.onGoBack,
   });
 
@@ -34,11 +35,7 @@ class AccessDeniedWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.lock_outline,
-              size: 64,
-              color: Colors.orange.shade400,
-            ),
+            Icon(Icons.lock_outline, size: 64, color: Colors.orange.shade400),
             const SizedBox(height: 16),
             Text(
               message,
@@ -53,10 +50,7 @@ class AccessDeniedWidget extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 description!,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppColors.textSecondary,
-                ),
+                style: TextStyle(fontSize: 16, color: AppColors.textSecondary),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -67,7 +61,7 @@ class AccessDeniedWidget extends StatelessWidget {
                 icon: const Icon(Icons.arrow_back),
                 label: const Text('Voltar'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
+                  backgroundColor: AppColors.primaryDark,
                   foregroundColor: Colors.white,
                 ),
               ),
@@ -77,4 +71,4 @@ class AccessDeniedWidget extends StatelessWidget {
       ),
     );
   }
-} 
+}

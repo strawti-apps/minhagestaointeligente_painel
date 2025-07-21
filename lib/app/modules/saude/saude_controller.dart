@@ -27,6 +27,13 @@ class PlantaoModel {
   });
 }
 
+class HospitalModel {
+  final int id;
+  final String nome;
+  final String endereco;
+  HospitalModel({required this.id, required this.nome, required this.endereco});
+}
+
 class SaudeController extends GetxController {
   // Médicos
   List<MedicoModel> medicos = [
@@ -73,12 +80,34 @@ class SaudeController extends GetxController {
   final TextEditingController plantaoDataController = TextEditingController();
   final TextEditingController plantaoHorarioController =
       TextEditingController();
+  final TextEditingController plantaoHorarioInicioController =
+      TextEditingController();
+  final TextEditingController plantaoHorarioFimController =
+      TextEditingController();
   final TextEditingController plantaoSearchController = TextEditingController();
 
   bool isSearchModePlantoes = false;
 
   String selectedSubModule =
       'medicos_list'; // 'medicos_list', 'medico_create', 'medico_edit', 'plantoes_list', 'plantao_create', 'plantao_edit'
+
+  HospitalModel? hospitalToEdit;
+  final TextEditingController hospitalNomeController = TextEditingController();
+  final TextEditingController hospitalEnderecoController =
+      TextEditingController();
+  List<HospitalModel> hospitais = [
+    HospitalModel(
+      id: 1,
+      nome: 'Hospital Municipal',
+      endereco: 'Rua Central, 100',
+    ),
+    HospitalModel(
+      id: 2,
+      nome: 'Hospital Regional',
+      endereco: 'Av. Brasil, 200',
+    ),
+  ];
+  List<HospitalModel> filteredHospitais = [];
 
   @override
   void onInit() {
@@ -166,7 +195,8 @@ class SaudeController extends GetxController {
     plantaoToEdit = null;
     plantaoMedicoNomeController.clear();
     plantaoDataController.clear();
-    plantaoHorarioController.clear();
+    plantaoHorarioInicioController.clear();
+    plantaoHorarioFimController.clear();
     update();
   }
 
@@ -175,7 +205,10 @@ class SaudeController extends GetxController {
     plantaoToEdit = plantao;
     plantaoMedicoNomeController.text = plantao.medicoNome;
     plantaoDataController.text = plantao.data;
-    plantaoHorarioController.text = plantao.horario;
+    // Supondo que o horário está no formato '08:00-18:00'
+    final partes = plantao.horario.split('-');
+    plantaoHorarioInicioController.text = partes.isNotEmpty ? partes[0] : '';
+    plantaoHorarioFimController.text = partes.length > 1 ? partes[1] : '';
     update();
   }
 
@@ -189,11 +222,13 @@ class SaudeController extends GetxController {
   }
 
   void createPlantao() {
+    final horario =
+        '${plantaoHorarioInicioController.text}-${plantaoHorarioFimController.text}';
     final novo = PlantaoModel(
       id: plantoes.isNotEmpty ? plantoes.last.id + 1 : 1,
       medicoNome: plantaoMedicoNomeController.text,
       data: plantaoDataController.text,
-      horario: plantaoHorarioController.text,
+      horario: horario,
     );
     plantoes.add(novo);
     filteredPlantoes.add(novo);
@@ -202,13 +237,15 @@ class SaudeController extends GetxController {
 
   void updatePlantao() {
     if (plantaoToEdit == null) return;
+    final horario =
+        '${plantaoHorarioInicioController.text}-${plantaoHorarioFimController.text}';
     final index = plantoes.indexWhere((p) => p.id == plantaoToEdit!.id);
     if (index != -1) {
       plantoes[index] = PlantaoModel(
         id: plantaoToEdit!.id,
         medicoNome: plantaoMedicoNomeController.text,
         data: plantaoDataController.text,
-        horario: plantaoHorarioController.text,
+        horario: horario,
       );
       filteredPlantoes = List.from(plantoes);
     }
@@ -253,5 +290,63 @@ class SaudeController extends GetxController {
   void goToPlantoes() {
     selectedSubModule = 'plantoes_list';
     update();
+  }
+
+  void goToHospitais() {
+    selectedSubModule = 'hospitais';
+    update();
+  }
+
+  void goToCreateHospital() {
+    hospitalToEdit = null;
+    hospitalNomeController.clear();
+    hospitalEnderecoController.clear();
+    selectedSubModule = 'hospital_create';
+    update();
+  }
+
+  void searchHospitais(String query) {
+    if (query.isEmpty) {
+      filteredHospitais = List.from(hospitais);
+    } else {
+      filteredHospitais =
+          hospitais
+              .where((h) => h.nome.toLowerCase().contains(query.toLowerCase()))
+              .toList();
+    }
+    update();
+  }
+
+  void backToHospitaisList() {
+    selectedSubModule = 'hospitais';
+    hospitalToEdit = null;
+    hospitalNomeController.clear();
+    hospitalEnderecoController.clear();
+    update();
+  }
+
+  void createHospital() {
+    final novo = HospitalModel(
+      id: hospitais.isNotEmpty ? hospitais.last.id + 1 : 1,
+      nome: hospitalNomeController.text,
+      endereco: hospitalEnderecoController.text,
+    );
+    hospitais.add(novo);
+    filteredHospitais.add(novo);
+    backToHospitaisList();
+  }
+
+  void updateHospital() {
+    if (hospitalToEdit == null) return;
+    final index = hospitais.indexWhere((h) => h.id == hospitalToEdit!.id);
+    if (index != -1) {
+      hospitais[index] = HospitalModel(
+        id: hospitalToEdit!.id,
+        nome: hospitalNomeController.text,
+        endereco: hospitalEnderecoController.text,
+      );
+      filteredHospitais = List.from(hospitais);
+    }
+    backToHospitaisList();
   }
 }

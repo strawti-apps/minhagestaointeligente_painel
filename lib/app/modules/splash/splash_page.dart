@@ -13,10 +13,8 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<SplashController>(
       builder: (context) {
-        return const Scaffold(
-          body: Center(child: AppLogo(size: 250)),
-        );
+        return const Scaffold(body: Center(child: AppLogo(size: 300)));
       },
     );
   }
-} 
+}

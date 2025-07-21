@@ -1,13 +1,13 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:file_picker/file_picker.dart';
 
+import '../../../shared/utils/form_validators.dart';
 import '../../../shared/widgets/app_button_default.dart';
 import '../../../shared/widgets/app_text_form_field.dart';
-import '../../../shared/utils/form_validators.dart';
 import '../../../themes/app_colors.dart';
 import '../materials_controller.dart';
 
@@ -17,7 +17,8 @@ class MaterialCreateEditWidget extends StatefulWidget {
   const MaterialCreateEditWidget({super.key, required this.isEditing});
 
   @override
-  State<MaterialCreateEditWidget> createState() => _MaterialCreateEditWidgetState();
+  State<MaterialCreateEditWidget> createState() =>
+      _MaterialCreateEditWidgetState();
 }
 
 class _MaterialCreateEditWidgetState extends State<MaterialCreateEditWidget> {
@@ -62,7 +63,7 @@ class _MaterialCreateEditWidgetState extends State<MaterialCreateEditWidget> {
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
+                        color: AppColors.primaryDark,
                       ),
                     ),
                   ],
@@ -82,7 +83,9 @@ class _MaterialCreateEditWidgetState extends State<MaterialCreateEditWidget> {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+                    border: Border.all(
+                      color: AppColors.primary.withValues(alpha: 0.3),
+                    ),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Column(
@@ -90,7 +93,10 @@ class _MaterialCreateEditWidgetState extends State<MaterialCreateEditWidget> {
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.attach_file, color: AppColors.primary),
+                          const Icon(
+                            Icons.attach_file,
+                            color: AppColors.primary,
+                          ),
                           const SizedBox(width: 8),
                           const Text(
                             'Arquivo do Material',
@@ -102,7 +108,7 @@ class _MaterialCreateEditWidgetState extends State<MaterialCreateEditWidget> {
                         ],
                       ),
                       const SizedBox(height: 12),
-                      
+
                       // URL Field
                       AppTextFormField(
                         controller: controller.materialFileUrlController,
@@ -111,29 +117,37 @@ class _MaterialCreateEditWidgetState extends State<MaterialCreateEditWidget> {
                         validator: FormValidators.required,
                         maxLines: 2,
                       ),
-                      
+
                       const SizedBox(height: 16),
-                      
+
                       // Upload Section
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: _isDragOver 
-                                ? AppColors.primary 
-                                : AppColors.primary.withValues(alpha: 0.3),
+                            color:
+                                _isDragOver
+                                    ? AppColors.primary
+                                    : AppColors.primary.withValues(alpha: 0.3),
                             width: _isDragOver ? 2 : 1,
                           ),
                           borderRadius: BorderRadius.circular(8),
-                          color: _isDragOver 
-                              ? AppColors.primary.withValues(alpha: 0.05)
-                              : Colors.grey[50],
+                          color:
+                              _isDragOver
+                                  ? AppColors.primary.withValues(alpha: 0.05)
+                                  : Colors.grey[50],
                         ),
                         child: InkWell(
-                          onTap: controller.isUploadingFile ? null : () => _selectFile(controller),
+                          onTap:
+                              controller.isUploadingFile
+                                  ? null
+                                  : () => _selectFile(controller),
                           borderRadius: BorderRadius.circular(8),
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 32,
+                              horizontal: 16,
+                            ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -174,7 +188,9 @@ class _MaterialCreateEditWidgetState extends State<MaterialCreateEditWidget> {
                                   OutlinedButton.icon(
                                     onPressed: () => _selectFile(controller),
                                     icon: const Icon(Icons.refresh),
-                                    label: const Text('Selecionar outro arquivo'),
+                                    label: const Text(
+                                      'Selecionar outro arquivo',
+                                    ),
                                   ),
                                 ] else ...[
                                   Icon(
@@ -192,7 +208,7 @@ class _MaterialCreateEditWidgetState extends State<MaterialCreateEditWidget> {
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
-                                    kIsWeb 
+                                    kIsWeb
                                         ? 'ou arraste e solte aqui'
                                         : 'Toque para abrir o seletor de arquivos',
                                     style: TextStyle(
@@ -202,16 +218,21 @@ class _MaterialCreateEditWidgetState extends State<MaterialCreateEditWidget> {
                                   ),
                                   const SizedBox(height: 16),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                      vertical: 6,
+                                    ),
                                     decoration: BoxDecoration(
-                                      color: AppColors.primary.withValues(alpha: 0.1),
+                                      color: AppColors.primary.withValues(
+                                        alpha: 0.1,
+                                      ),
                                       borderRadius: BorderRadius.circular(16),
                                     ),
                                     child: Text(
                                       'PDF, DOC, DOCX (até 10MB)',
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: AppColors.primary,
+                                        color: AppColors.primaryDark,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
@@ -238,11 +259,15 @@ class _MaterialCreateEditWidgetState extends State<MaterialCreateEditWidget> {
                     ),
                     const SizedBox(width: 15),
                     AppButtonDefault(
-                      text: widget.isEditing ? 'Salvar Alterações' : 'Criar Material',
+                      text:
+                          widget.isEditing
+                              ? 'Salvar Alterações'
+                              : 'Criar Material',
                       onTap: () => _saveMaterial(controller),
-                      isLoading: widget.isEditing
-                          ? controller.isLoadingEditing
-                          : controller.isLoadingCreating,
+                      isLoading:
+                          widget.isEditing
+                              ? controller.isLoadingEditing
+                              : controller.isLoadingCreating,
                     ),
                   ],
                 ),
@@ -265,18 +290,21 @@ class _MaterialCreateEditWidgetState extends State<MaterialCreateEditWidget> {
 
       if (result != null && result.files.isNotEmpty) {
         final file = result.files.first;
-        
+
         setState(() {
           _selectedFileName = file.name;
         });
 
         // Fazer upload do arquivo
         String? uploadedUrl;
-        
+
         if (kIsWeb) {
           // Para web, usar bytes
           if (file.bytes != null) {
-            uploadedUrl = await controller.uploadFileBytes(file.bytes!, file.name);
+            uploadedUrl = await controller.uploadFileBytes(
+              file.bytes!,
+              file.name,
+            );
           }
         } else {
           // Para mobile/desktop, usar path
@@ -323,4 +351,4 @@ class _MaterialCreateEditWidgetState extends State<MaterialCreateEditWidget> {
       }
     }
   }
-} 
+}

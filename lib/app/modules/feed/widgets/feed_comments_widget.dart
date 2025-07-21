@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:minha_gestao_inteligente_painel/app/shared/widgets/app_button_default.dart';
+import 'package:minha_gestao_inteligente_painel/app/shared/widgets/app_text_form_field.dart';
 
 import '../feed_controller.dart';
 
@@ -78,18 +80,16 @@ class FeedCommentsWidget extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: TextField(
+                child: AppTextFormField(
                   controller: controller.respostaController,
-                  decoration: const InputDecoration(
-                    hintText: 'Responder...',
-                    border: OutlineInputBorder(),
-                  ),
+                  hintText: 'Responder...',
                 ),
               ),
               const SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: controller.responderComentario,
-                child: const Text('Responder'),
+              AppButtonDefault(
+                onTap: controller.responderComentario,
+                text: 'Responder',
+                paddingVertical: 12,
               ),
             ],
           ),

@@ -19,7 +19,7 @@ class _NavbarDesktopWidgetState extends State<NavbarDesktopWidget> {
     final String userType = Get.parameters['type'] ?? 'admin';
     final menuItems = _getMenuItems(userType);
     final String currentRoute = Get.currentRoute;
-    // Encontrar o índice do item de menu que corresponde à rota atual
+
     int selectedIndex = menuItems.indexWhere(
       (item) => currentRoute.startsWith(item.route),
     );
@@ -48,9 +48,8 @@ class _NavbarDesktopWidgetState extends State<NavbarDesktopWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(child: AppLogo(size: 100)),
+              Center(child: AppLogo()),
               const SizedBox(height: 12),
-              // Menu
               Expanded(
                 child: Column(
                   children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../themes/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -17,7 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool centerTitle;
   final double? titleSpacing;
   final VoidCallback? onBackPressed;
-  
+
   const CustomAppBar({
     super.key,
     required this.title,
@@ -34,18 +35,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.titleSpacing,
     this.onBackPressed,
   });
-  
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: titleWidget ?? Text(
-        title,
-        style: TextStyle(
-          color: titleColor ?? AppColors.textPrimary,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+      title:
+          titleWidget ??
+          Text(
+            title,
+            style: TextStyle(
+              color: titleColor ?? AppColors.textPrimary,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
       leading: _buildLeading(),
       actions: actions,
       elevation: elevation ?? 0,
@@ -53,28 +56,29 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: centerTitle,
       titleSpacing: titleSpacing,
       bottom: bottom,
-      iconTheme: IconThemeData(
-        color: iconColor ?? AppColors.primary,
-      ),
+      iconTheme: IconThemeData(color: iconColor ?? AppColors.primaryDark),
     );
   }
-  
+
   Widget? _buildLeading() {
     if (leading != null) {
       return leading;
     }
-    
+
     if (showBackButton) {
       return IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: onBackPressed ?? () => Get.back(),
       );
     }
-    
+
     return null;
   }
-  
+
   @override
-  Size get preferredSize => Size.fromHeight(bottom != null ? 
-    kToolbarHeight + bottom!.preferredSize.height : kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(
+    bottom != null
+        ? kToolbarHeight + bottom!.preferredSize.height
+        : kToolbarHeight,
+  );
 }

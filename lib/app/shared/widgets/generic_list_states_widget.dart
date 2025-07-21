@@ -29,7 +29,7 @@ class GenericListLoadingWidget extends StatelessWidget {
             child: Column(
               children: [
                 CircularProgressIndicator(
-                  color: AppColors.primary,
+                  color: AppColors.primaryDark,
                   strokeWidth: 3,
                 ),
                 const SizedBox(height: 16),
@@ -116,7 +116,7 @@ class GenericListErrorWidget extends StatelessWidget {
                 icon: const Icon(Icons.refresh),
                 label: const Text('Tentar novamente'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
+                  backgroundColor: AppColors.primaryDark,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,
@@ -180,7 +180,7 @@ class GenericListEmptyWidget extends StatelessWidget {
               child: Icon(
                 icon ?? Icons.inbox_outlined,
                 size: 64,
-                color: AppColors.primary,
+                color: AppColors.primaryDark,
               ),
             ),
             const SizedBox(height: 24),

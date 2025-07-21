@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import '../../themes/app_colors.dart';
 import 'custom_button.dart';
 
@@ -60,7 +61,7 @@ class ErrorMessage extends StatelessWidget {
               CustomButton(
                 onPressed: onRetry!,
                 text: retryButtonText ?? 'Tentar novamente',
-                backgroundColor: AppColors.primary,
+                backgroundColor: AppColors.primaryDark,
                 height: 48.h,
                 width: 200.w,
                 borderRadius: 8.r,
@@ -70,4 +71,4 @@ class ErrorMessage extends StatelessWidget {
       ),
     );
   }
-} 
+}

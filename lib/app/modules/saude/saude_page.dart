@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import '../../shared/navbar/navbar_desktop_widget.dart';
 import '../../shared/navbar/navbar_mobile_widget.dart';
 import 'saude_controller.dart';
+import 'widgets/hospital_create_edit_widget.dart';
+import 'widgets/hospital_header_widget.dart';
 import 'widgets/medico_create_edit_widget.dart';
 import 'widgets/medico_header_widget.dart';
 import 'widgets/medico_search_field.dart';
@@ -30,6 +32,18 @@ class SaudePage extends StatelessWidget {
             child: GetBuilder<SaudeController>(
               builder: (controller) {
                 switch (controller.selectedSubModule) {
+                  case 'hospital_create':
+                    return const HospitalCreateEditWidget(isEditing: false);
+                  case 'hospitais':
+                    return Column(
+                      children: [
+                        const HospitalHeaderWidget(),
+                        // Aqui você pode adicionar um HospitalSearchField se desejar
+                        // const HospitalSearchField(),
+                        // E a lista de hospitais
+                        // Expanded(child: HospitaisListWidget(controller: controller)),
+                      ],
+                    );
                   case 'medico_create':
                     return const MedicoCreateEditWidget(isEditing: false);
                   case 'medico_edit':
@@ -49,6 +63,15 @@ class SaudePage extends StatelessWidget {
                   case 'plantao_edit':
                     return const PlantaoCreateEditWidget(isEditing: true);
                   case 'medicos_list':
+                    return Column(
+                      children: [
+                        const MedicoHeaderWidget(),
+                        const MedicoSearchField(),
+                        Expanded(
+                          child: MedicosListWidget(controller: controller),
+                        ),
+                      ],
+                    );
                   default:
                     return Column(
                       children: [

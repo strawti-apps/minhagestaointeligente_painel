@@ -61,7 +61,7 @@ class EmptyState extends StatelessWidget {
               FaIcon(
                 icon,
                 size: iconSize ?? 80.r,
-                color: iconColor ?? AppColors.primary,
+                color: iconColor ?? AppColors.primaryDark,
               ),
             SizedBox(height: 24.h),
             if (title != null)
@@ -90,7 +90,7 @@ class EmptyState extends StatelessWidget {
               CustomButton(
                 onPressed: onPressed!,
                 text: buttonText,
-                backgroundColor: AppColors.primary,
+                backgroundColor: AppColors.primaryDark,
                 height: 48.h,
                 width: 200.w,
                 borderRadius: 8.r,

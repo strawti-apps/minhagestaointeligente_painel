@@ -93,7 +93,7 @@ class LoginEmailPage extends StatelessWidget {
                           const SizedBox(height: 28),
                           AppButtonDefault(
                             textColor: AppColors.background,
-                            buttonColor: AppColors.primary,
+                            buttonColor: AppColors.primaryDark,
                             isLoading: controller.isLoading,
                             paddingVertical: 10,
                             onTap:

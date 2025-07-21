@@ -78,7 +78,7 @@ class CustomSidebar extends StatelessWidget {
                   Icon(
                     Icons.add_box_rounded,
                     size: 32,
-                    color: AppColors.primary,
+                    color: AppColors.primaryDark,
                   ),
                   SizedBox(width: 8),
                   Text(
@@ -136,7 +136,7 @@ class CustomSidebar extends StatelessWidget {
                   ),
                   child: ListTile(
                     leading: CircleAvatar(
-                      backgroundColor: AppColors.primary,
+                      backgroundColor: AppColors.primaryDark,
                       child: Text(
                         initials ?? 'U',
                         style: const TextStyle(color: Colors.white),

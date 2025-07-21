@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:minha_gestao_inteligente_painel/app/themes/app_colors.dart';
 
 import '../../../shared/widgets/generic_grid_widget.dart';
 import '../feed_controller.dart';
@@ -20,11 +21,15 @@ class FeedListWidget extends StatelessWidget {
         aspectRatioCalculator: (baseRatio, items) => 1.1,
         itemBuilder: (post) {
           return InkWell(
+            highlightColor: Colors.transparent,
             onTap: () => controller.selecionarPost(post),
             child: Card(
               color: post.bloqueado ? Colors.grey[200] : Colors.white,
-              elevation: 2,
+              elevation: post.bloqueado ? 0 : 2,
               shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  color: post.bloqueado ? AppColors.error : AppColors.card,
+                ),
                 borderRadius: BorderRadius.circular(14),
               ),
               child: Padding(

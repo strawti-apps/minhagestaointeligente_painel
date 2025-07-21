@@ -52,7 +52,7 @@ class UserInfoDesktopWidget extends StatelessWidget {
                 child: Text(
                   UserInfoHelper.getInitials(user.firstName, user.lastName),
                   style: TextStyle(
-                    color: AppColors.primary,
+                    color: AppColors.primaryDark,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),
@@ -115,7 +115,7 @@ class UserInfoMobileWidget extends StatelessWidget {
             child: Text(
               UserInfoHelper.getInitials(user.firstName, user.lastName),
               style: TextStyle(
-                color: AppColors.primary,
+                color: AppColors.primaryDark,
                 fontWeight: FontWeight.bold,
                 fontSize: 12,
               ),

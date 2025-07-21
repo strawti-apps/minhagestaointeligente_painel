@@ -28,7 +28,7 @@ class AppButtonDefault extends StatelessWidget {
     this.isLoading = false,
     this.usingJustPadding = false,
     this.width = 300,
-    this.paddingVertical = 15,
+    this.paddingVertical = 8,
     this.fontSize = 14,
     this.radius,
     this.isValid,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:minha_gestao_inteligente_painel/app/shared/widgets/app_button_default.dart';
 
+import '../../../shared/widgets/app_button_default.dart';
 import '../saude_controller.dart';
 
 class MedicoHeaderWidget extends StatelessWidget {
@@ -19,28 +19,44 @@ class MedicoHeaderWidget extends StatelessWidget {
             'Gerenciar Médicos',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          Row(
-            children: [
-              AppButtonDefault(
-                onTap: controller.goToPlantoes,
-                icon: Icons.access_time,
-                text: 'Ver Plantões',
-                paddingVertical: 5,
-                isValid: true,
-                width: 150,
-                usingJustPadding: false,
-              ),
-              const SizedBox(width: 8),
-              AppButtonDefault(
-                onTap: controller.goToCreateMedico,
-                icon: Icons.add,
-                text: 'Novo Médico',
-                paddingVertical: 5,
-                isValid: true,
-                width: 150,
-                usingJustPadding: false,
-              ),
-            ],
+          Spacer(),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: AppButtonDefault(
+                    onTap: controller.goToPlantoes,
+                    icon: Icons.access_time,
+                    text: 'Ver Plantões',
+                    paddingVertical: 5,
+                    isValid: true,
+                    usingJustPadding: false,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: AppButtonDefault(
+                    onTap: controller.goToHospitais,
+                    icon: Icons.local_hospital,
+                    text: 'ver Hospitais',
+                    paddingVertical: 5,
+                    isValid: true,
+                    usingJustPadding: false,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: AppButtonDefault(
+                    onTap: controller.goToCreateMedico,
+                    icon: Icons.add,
+                    text: 'Novo Médico',
+                    paddingVertical: 5,
+                    isValid: true,
+                    usingJustPadding: false,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

@@ -32,11 +32,11 @@ class SelectedUserCardWidget extends StatelessWidget {
           Icon(
             user.role == 'teacher' ? Icons.school : Icons.person,
             size: 16,
-            color: AppColors.primary,
+            color: AppColors.primaryDark,
           ),
-          
+
           const SizedBox(width: 6),
-          
+
           // Nome e role
           Flexible(
             child: Column(
@@ -63,9 +63,9 @@ class SelectedUserCardWidget extends StatelessWidget {
               ],
             ),
           ),
-          
+
           const SizedBox(width: 8),
-          
+
           // Botão de remoção
           GestureDetector(
             onTap: onRemove,
@@ -75,15 +75,11 @@ class SelectedUserCardWidget extends StatelessWidget {
                 color: Colors.red.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
-                Icons.close,
-                size: 16,
-                color: Colors.red,
-              ),
+              child: const Icon(Icons.close, size: 16, color: Colors.red),
             ),
           ),
         ],
       ),
     );
   }
-} 
+}

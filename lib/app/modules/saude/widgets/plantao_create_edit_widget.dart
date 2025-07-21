@@ -101,11 +101,38 @@ class _PlantaoCreateEditWidgetState extends State<PlantaoCreateEditWidget> {
             ),
             const SizedBox(height: 20),
             AppTextFormField(
-              controller: controller.plantaoHorarioController,
-              title: 'Horário *',
-              hintText: 'Ex: 08:00-18:00',
-              validator: FormValidators.required,
-              prefixIcon: const Icon(Icons.access_time),
+              controller: controller.plantaoHorarioInicioController,
+              title: 'Hora de início *',
+              hintText: 'Selecione a hora de início',
+              readOnly: true,
+              onTap: () async {
+                final picked = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay.now(),
+                );
+                if (picked != null) {
+                  controller.plantaoHorarioInicioController.text = picked
+                      .format(context);
+                }
+              },
+            ),
+            const SizedBox(height: 16),
+            AppTextFormField(
+              controller: controller.plantaoHorarioFimController,
+              title: 'Hora de fim *',
+              hintText: 'Selecione a hora de fim',
+              readOnly: true,
+              onTap: () async {
+                final picked = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay.now(),
+                );
+                if (picked != null) {
+                  controller.plantaoHorarioFimController.text = picked.format(
+                    context,
+                  );
+                }
+              },
             ),
             const SizedBox(height: 30),
 

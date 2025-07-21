@@ -19,7 +19,7 @@ class PlantoesListWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         final plantao = controller.filteredPlantoes[index];
         return Card(
-          elevation: 0.5,
+          elevation: 1,
           color: AppColors.card,
           child: ListTile(
             title: Text(plantao.medicoNome),
