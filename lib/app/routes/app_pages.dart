@@ -5,6 +5,7 @@ import '../modules/auth/auth_routes.dart';
 import '../modules/classes/classes_routes.dart';
 import '../modules/contents/contents_routes.dart';
 import '../modules/dashboard/dashboard_routes.dart';
+import '../modules/educacao/educacao_routes.dart';
 import '../modules/feed/feed_routes.dart';
 import '../modules/materials/materials_routes.dart';
 import '../modules/notifications/notifications_routes.dart';
@@ -29,5 +30,6 @@ class AppPages {
     ...saudeRoutes,
     ...feedRoutes,
     ...notificationsRoutes,
+    ...educacaoRoutes,
   ];
 }

@@ -184,21 +184,27 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.radius ?? 6),
               borderSide: BorderSide(
-                color: widget.borderColor ?? AppColors.primary.withValues(alpha: 0.1),
+                color:
+                    widget.borderColor ??
+                    AppColors.primaryLight.withValues(alpha: 0.5),
                 width: 1.5,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.radius ?? 6),
               borderSide: BorderSide(
-                color: widget.borderColor ?? AppColors.primary.withValues(alpha: 0.1),
+                color:
+                    widget.borderColor ??
+                    AppColors.primaryLight.withValues(alpha: 0.5),
                 width: 1.5,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.radius ?? 6),
               borderSide: BorderSide(
-                color: widget.borderColor ?? AppColors.primary.withValues(alpha: 0.5),
+                color:
+                    widget.borderColor ??
+                    AppColors.primaryLight.withValues(alpha: 0.5),
                 width: 1.5,
               ),
             ),

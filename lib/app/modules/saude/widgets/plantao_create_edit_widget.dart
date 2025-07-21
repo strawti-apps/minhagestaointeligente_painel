@@ -56,14 +56,13 @@ class _PlantaoCreateEditWidgetState extends State<PlantaoCreateEditWidget> {
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.primary,
+                    color: AppColors.textPrimary,
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 30),
 
-            // Nome do Médico
             AppTextFormField(
               controller: controller.plantaoMedicoNomeController,
               title: 'Nome do Médico *',
@@ -71,8 +70,6 @@ class _PlantaoCreateEditWidgetState extends State<PlantaoCreateEditWidget> {
               validator: FormValidators.required,
             ),
             const SizedBox(height: 20),
-
-            // Data do Plantão
             AppTextFormField(
               controller: controller.plantaoDataController,
               title: 'Data do Plantão *',
@@ -103,8 +100,6 @@ class _PlantaoCreateEditWidgetState extends State<PlantaoCreateEditWidget> {
               suffixIcon: const Icon(Icons.calendar_today),
             ),
             const SizedBox(height: 20),
-
-            // Horário do Plantão
             AppTextFormField(
               controller: controller.plantaoHorarioController,
               title: 'Horário *',
@@ -114,13 +109,15 @@ class _PlantaoCreateEditWidgetState extends State<PlantaoCreateEditWidget> {
             ),
             const SizedBox(height: 30),
 
-            // Actions
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                OutlinedButton(
-                  onPressed: controller.backToPlantoesList,
-                  child: const Text('Cancelar'),
+                AppButtonDefault(
+                  text: 'Cancelar',
+                  onTap: controller.backToPlantoesList,
+                  borderColor: AppColors.textPrimary,
+                  buttonColor: AppColors.card,
+                  textColor: AppColors.textPrimary,
                 ),
                 const SizedBox(width: 15),
                 AppButtonDefault(

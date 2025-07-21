@@ -248,11 +248,11 @@ class _DashboardCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
+      elevation: 0.5,
       color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(14),
-        side: BorderSide(color: Colors.grey.shade200, width: 1),
+        side: BorderSide(color: Colors.grey.shade200, width: 0.5),
       ),
       child: Container(
         height: height,

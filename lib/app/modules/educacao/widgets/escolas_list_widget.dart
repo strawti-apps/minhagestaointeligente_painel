@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../saude_controller.dart';
+import '../educacao_controller.dart';
 
-class MedicosListWidget extends StatelessWidget {
-  final SaudeController controller;
-  const MedicosListWidget({super.key, required this.controller});
+class EscolasListWidget extends StatelessWidget {
+  const EscolasListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    if (controller.filteredMedicos.isEmpty) {
-      return const Center(child: Text('Nenhum médico encontrado.'));
+    final controller = Get.find<EducacaoController>();
+    if (controller.escolas.isEmpty) {
+      return const Center(child: Text('Nenhuma escola ou creche encontrada.'));
     }
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       child: Align(
         alignment: Alignment.topLeft,
         child: Wrap(
           alignment: WrapAlignment.start,
           children:
-              controller.filteredMedicos.map((medico) {
+              controller.escolas.map((escola) {
                 return ConstrainedBox(
                   constraints: const BoxConstraints(
                     minWidth: 320,
@@ -36,7 +37,7 @@ class MedicosListWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            medico.nome,
+                            escola.nome,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
@@ -45,7 +46,7 @@ class MedicosListWidget extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            medico.especialidade,
+                            escola.tipo,
                             style: const TextStyle(
                               fontSize: 15,
                               color: Colors.blue,
@@ -53,33 +54,17 @@ class MedicosListWidget extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'CRM: ${medico.crm}',
+                            'Endereço: ${escola.endereco}',
                             style: const TextStyle(
                               fontSize: 14,
                               color: Colors.black,
                             ),
                           ),
-                          const SizedBox(height: 16),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.edit,
-                                  color: Colors.blueAccent,
-                                ),
-                                onPressed:
-                                    () => controller.goToEditMedico(medico),
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.delete,
-                                  color: Colors.redAccent,
-                                ),
-                                onPressed:
-                                    () => controller.deleteMedico(medico),
-                              ),
-                            ],
+                          const SizedBox(height: 24),
+                          const Icon(
+                            Icons.school,
+                            size: 32,
+                            color: Colors.blueAccent,
                           ),
                         ],
                       ),

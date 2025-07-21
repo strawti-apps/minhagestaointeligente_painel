@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../saude_controller.dart';
+import '../educacao_controller.dart';
 
-class MedicosListWidget extends StatelessWidget {
-  final SaudeController controller;
-  const MedicosListWidget({super.key, required this.controller});
+class ProfessoresListWidget extends StatelessWidget {
+  const ProfessoresListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    if (controller.filteredMedicos.isEmpty) {
-      return const Center(child: Text('Nenhum médico encontrado.'));
+    final controller = Get.find<EducacaoController>();
+    if (controller.professores.isEmpty) {
+      return const Center(child: Text('Nenhum professor encontrado.'));
     }
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       child: Align(
         alignment: Alignment.topLeft,
         child: Wrap(
-          alignment: WrapAlignment.start,
           children:
-              controller.filteredMedicos.map((medico) {
+              controller.professores.map((prof) {
                 return ConstrainedBox(
                   constraints: const BoxConstraints(
                     minWidth: 320,
@@ -36,7 +36,7 @@ class MedicosListWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            medico.nome,
+                            prof.nome,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
@@ -45,39 +45,35 @@ class MedicosListWidget extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            medico.especialidade,
+                            'Disciplina: ${prof.disciplina}',
                             style: const TextStyle(
                               fontSize: 15,
-                              color: Colors.blue,
+                              color: Colors.green,
                             ),
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'CRM: ${medico.crm}',
+                            'Email: ${prof.email}',
                             style: const TextStyle(
                               fontSize: 14,
                               color: Colors.black,
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 24),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.edit,
-                                  color: Colors.blueAccent,
-                                ),
+                              ElevatedButton.icon(
                                 onPressed:
-                                    () => controller.goToEditMedico(medico),
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.delete,
-                                  color: Colors.redAccent,
+                                    () => controller.visualizarComoProfessor(
+                                      prof,
+                                    ),
+                                icon: const Icon(Icons.visibility),
+                                label: const Text('Visualizar como'),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.blueAccent,
+                                  foregroundColor: Colors.white,
                                 ),
-                                onPressed:
-                                    () => controller.deleteMedico(medico),
                               ),
                             ],
                           ),

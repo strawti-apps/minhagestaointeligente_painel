@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:minha_gestao_inteligente_painel/app/themes/app_colors.dart';
 
 import '../notifications_controller.dart';
 
@@ -47,7 +48,10 @@ class NotificationsListWidget extends StatelessWidget {
                     ? const Text('Lida', style: TextStyle(color: Colors.green))
                     : TextButton(
                       onPressed: () => controller.marcarComoLida(notification),
-                      child: const Text('Marcar como lida'),
+                      child: const Text(
+                        'Marcar como lida',
+                        style: TextStyle(color: AppColors.textPrimary),
+                      ),
                     ),
           ),
         );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:minha_gestao_inteligente_painel/app/shared/widgets/app_button_default.dart';
 
 import '../saude_controller.dart';
 
@@ -20,16 +21,24 @@ class MedicoHeaderWidget extends StatelessWidget {
           ),
           Row(
             children: [
-              ElevatedButton.icon(
-                onPressed: controller.goToPlantoes,
-                icon: const Icon(Icons.access_time),
-                label: const Text('Ver Plantões'),
+              AppButtonDefault(
+                onTap: controller.goToPlantoes,
+                icon: Icons.access_time,
+                text: 'Ver Plantões',
+                paddingVertical: 5,
+                isValid: true,
+                width: 150,
+                usingJustPadding: false,
               ),
               const SizedBox(width: 8),
-              ElevatedButton.icon(
-                onPressed: controller.goToCreateMedico,
-                icon: const Icon(Icons.add),
-                label: const Text('Novo Médico'),
+              AppButtonDefault(
+                onTap: controller.goToCreateMedico,
+                icon: Icons.add,
+                text: 'Novo Médico',
+                paddingVertical: 5,
+                isValid: true,
+                width: 150,
+                usingJustPadding: false,
               ),
             ],
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minha_gestao_inteligente_painel/app/themes/app_colors.dart';
 
 import '../saude_controller.dart';
 
@@ -18,6 +19,8 @@ class PlantoesListWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         final plantao = controller.filteredPlantoes[index];
         return Card(
+          elevation: 0.5,
+          color: AppColors.card,
           child: ListTile(
             title: Text(plantao.medicoNome),
             subtitle: Text(
@@ -27,11 +30,11 @@ class PlantoesListWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: const Icon(Icons.edit),
+                  icon: const Icon(Icons.edit, color: AppColors.success),
                   onPressed: () => controller.goToEditPlantao(plantao),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.delete),
+                  icon: const Icon(Icons.delete, color: AppColors.error),
                   onPressed: () => controller.deletePlantao(plantao),
                 ),
               ],
