@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,6 +13,15 @@ void main() async {
   // await SupabaseConfig.initialize();
   // await UserService.initialize();
   // Get.put(AuthService(), permanent: true);
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: "AIzaSyDHSd0h8tl_0yRWADzwMw_4PIvu-UXyfb0",
+      appId: "1:817244558564:web:ee8fc5a0a181406ce308f1",
+      messagingSenderId: "817244558564",
+      projectId: "minhagestaointeligente-painel",
+    ),
+  );
+
   Get.put(NavbarNavigationController(), permanent: true);
   runApp(const MyApp());
 }

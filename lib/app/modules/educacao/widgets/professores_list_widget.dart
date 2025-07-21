@@ -60,23 +60,23 @@ class ProfessoresListWidget extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 24),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              ElevatedButton.icon(
-                                onPressed:
-                                    () => controller.visualizarComoProfessor(
-                                      prof,
-                                    ),
-                                icon: const Icon(Icons.visibility),
-                                label: const Text('Visualizar como'),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.blueAccent,
-                                  foregroundColor: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.end,
+                          //   children: [
+                          //     ElevatedButton.icon(
+                          //       onPressed:
+                          //           () => controller.visualizarComoProfessor(
+                          //             prof,
+                          //           ),
+                          //       icon: const Icon(Icons.visibility),
+                          //       label: const Text('Visualizar como'),
+                          //       style: ElevatedButton.styleFrom(
+                          //         backgroundColor: Colors.blueAccent,
+                          //         foregroundColor: Colors.white,
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
                         ],
                       ),
                     ),
