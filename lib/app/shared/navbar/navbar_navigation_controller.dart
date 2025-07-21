@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'navbar_navigation_items.dart';
 import '../../infra/services/user_service.dart';
+import 'navbar_navigation_items.dart';
 
 class NavbarNavigationController extends GetxController {
   int currentIndex = 0;
@@ -22,7 +22,9 @@ class NavbarNavigationController extends GetxController {
   void _updateNavItems() {
     final previousCount = _currentNavItems.length;
     _currentNavItems = sidebarNavItems;
-    debugPrint('NavbarController: Items atualizados. Anterior: $previousCount, Atual: ${_currentNavItems.length}');
+    debugPrint(
+      'NavbarController: Items atualizados. Anterior: $previousCount, Atual: ${_currentNavItems.length}',
+    );
     update();
   }
 
@@ -31,17 +33,6 @@ class NavbarNavigationController extends GetxController {
     if (index == currentIndex) return;
 
     final targetRoute = _currentNavItems[index].route;
-
-    // Verificar se usuário pode acessar a rota
-    if (!canAccessRoute(targetRoute)) {
-      Get.snackbar(
-        'Acesso Negado',
-        'Você não tem permissão para acessar esta área.',
-        backgroundColor: Colors.orange,
-        colorText: Colors.white,
-      );
-      return;
-    }
 
     currentIndex = index;
     update();
@@ -67,11 +58,15 @@ class NavbarNavigationController extends GetxController {
   // Método para atualizar navbar quando o role do usuário muda
   void updateNavbarForRole() {
     final user = UserService.currentUser;
-    debugPrint('NavbarController: Atualizando navbar para usuário: ${user?.email} - Role: ${user?.role}');
-    
+    debugPrint(
+      'NavbarController: Atualizando navbar para usuário: ${user?.email} - Role: ${user?.role}',
+    );
+
     _updateNavItems();
     _syncCurrentIndexFromRoute();
-    
-    debugPrint('NavbarController: Navbar atualizada com ${_currentNavItems.length} itens');
+
+    debugPrint(
+      'NavbarController: Navbar atualizada com ${_currentNavItems.length} itens',
+    );
   }
 }

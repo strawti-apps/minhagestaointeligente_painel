@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../infra/services/user_service.dart';
 import '../../modules/dashboard/dashboard_page.dart';
-import '../constants/app_constants.dart';
 
 // Itens para PROFESSOR
 const List<SidebarNavItem> _professorNavItems = [
@@ -118,13 +117,4 @@ List<SidebarNavItem> get sidebarNavItems {
   } else {
     return _adminNavItems;
   }
-}
-
-// Função para verificar se usuário pode acessar uma rota específica
-bool canAccessRoute(String route) {
-  final currentUser = UserService.currentUser;
-  if (currentUser == null) {
-    return false;
-  }
-  return AppConstants.canAccessRoute(currentUser.role, route);
 }

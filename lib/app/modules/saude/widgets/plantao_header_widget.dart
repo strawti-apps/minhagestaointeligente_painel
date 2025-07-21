@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../infra/services/user_service.dart';
-import '../../../shared/constants/app_constants.dart';
 import '../../../themes/app_colors.dart';
-import '../main_courses_controller.dart';
+import '../saude_controller.dart';
 
-class MainCourseHeaderWidget extends StatelessWidget {
-  const MainCourseHeaderWidget({super.key});
+class PlantaoHeaderWidget extends StatelessWidget {
+  const PlantaoHeaderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MainCoursesController>(
+    return GetBuilder<SaudeController>(
       builder: (controller) {
-        final currentUser = UserService.currentUser;
-        final canCreateCourse = currentUser != null && 
-            AppConstants.hasPermission(currentUser.role, 'create_course');
-
         return Container(
           padding: const EdgeInsets.all(20),
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -25,7 +19,7 @@ class MainCourseHeaderWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
+                color: Colors.black.withOpacity(0.05),
                 blurRadius: 10,
                 offset: const Offset(0, 2),
               ),
@@ -38,9 +32,9 @@ class MainCourseHeaderWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Cursos',
-                      style: const TextStyle(
+                    const Text(
+                      'Plantões',
+                      style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: AppColors.textPrimary,
@@ -48,7 +42,7 @@ class MainCourseHeaderWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '${controller.filteredMainCourses.length} curso(s) encontrado(s)',
+                      '${controller.filteredPlantoes.length} plantão(ões) encontrado(s)',
                       style: TextStyle(
                         fontSize: 14,
                         color: AppColors.textSecondary,
@@ -57,37 +51,35 @@ class MainCourseHeaderWidget extends StatelessWidget {
                   ],
                 ),
               ),
-
-              // Ações
               Row(
                 children: [
-                  // Botão de pesquisa
                   IconButton(
-                    onPressed: controller.toggleSearchMode,
+                    onPressed: controller.toggleSearchModePlantoes,
                     icon: Icon(
-                      controller.isSearchMode ? Icons.close : Icons.search,
+                      controller.isSearchModePlantoes
+                          ? Icons.close
+                          : Icons.search,
                       color: AppColors.primaryDark,
                     ),
                     tooltip:
-                        controller.isSearchMode ? 'Fechar busca' : 'Buscar',
+                        controller.isSearchModePlantoes
+                            ? 'Fechar busca'
+                            : 'Buscar',
                   ),
-
-                  if (canCreateCourse) ...[
-                    const SizedBox(width: 8),
-                    ElevatedButton.icon(
-                      onPressed: controller.goToCreateCourse,
-                      icon: const Icon(Icons.add, size: 20),
-                      label: const Text('Novo Curso'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryDark,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 8,
-                        ),
+                  const SizedBox(width: 8),
+                  ElevatedButton.icon(
+                    onPressed: controller.goToCreatePlantao,
+                    icon: const Icon(Icons.add, size: 20),
+                    label: const Text('Novo Plantão'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primaryDark,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
                       ),
                     ),
-                  ],
+                  ),
                 ],
               ),
             ],

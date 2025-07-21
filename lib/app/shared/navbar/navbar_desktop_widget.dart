@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:minha_gestao_inteligente_painel/app/modules/auth/pages/login_email_page.dart';
 
+import '../../modules/auth/pages/login_email_page.dart';
+import '../../modules/saude/saude_page.dart';
 import '../../shared/widgets/app_logo.dart';
 import '../../themes/app_colors.dart';
 
@@ -13,13 +14,16 @@ class NavbarDesktopWidget extends StatefulWidget {
 }
 
 class _NavbarDesktopWidgetState extends State<NavbarDesktopWidget> {
-  int selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
-    // Mock: defina o tipo do usuário aqui para testar ('professor', 'medico', 'admin')
     final String userType = Get.parameters['type'] ?? 'admin';
     final menuItems = _getMenuItems(userType);
+    final String currentRoute = Get.currentRoute;
+    // Encontrar o índice do item de menu que corresponde à rota atual
+    int selectedIndex = menuItems.indexWhere(
+      (item) => currentRoute.startsWith(item.route),
+    );
+    if (selectedIndex == -1) selectedIndex = 0;
 
     return Container(
       width: 280,
@@ -62,9 +66,9 @@ class _NavbarDesktopWidgetState extends State<NavbarDesktopWidget> {
                           child: InkWell(
                             borderRadius: BorderRadius.circular(10),
                             onTap: () {
-                              setState(() {
-                                selectedIndex = i;
-                              });
+                              if (Get.currentRoute != menuItems[i].route) {
+                                Get.toNamed(menuItems[i].route);
+                              }
                             },
                             child: Container(
                               decoration:
@@ -106,7 +110,6 @@ class _NavbarDesktopWidgetState extends State<NavbarDesktopWidget> {
                   ],
                 ),
               ),
-              // Usuário mockado e botão sair
               const SizedBox(height: 24),
               Divider(),
               const SizedBox(height: 12),
@@ -157,33 +160,50 @@ class _NavbarDesktopWidgetState extends State<NavbarDesktopWidget> {
 class _SidebarMenuItem {
   final String label;
   final IconData icon;
-  const _SidebarMenuItem(this.label, this.icon);
+  final String route;
+  const _SidebarMenuItem(this.label, this.icon, this.route);
 }
 
 List<_SidebarMenuItem> _getMenuItems(String type) {
   switch (type) {
     case 'professor':
       return const [
-        _SidebarMenuItem('Dashboard', Icons.dashboard),
-        _SidebarMenuItem('Alunos', Icons.people),
-        _SidebarMenuItem('Frequência do Aluno', Icons.check_circle_outline),
-        _SidebarMenuItem('Boletins', Icons.assignment),
-        _SidebarMenuItem('Material Escolar', Icons.menu_book),
+        _SidebarMenuItem('Dashboard', Icons.dashboard, '/dashboard'),
+        _SidebarMenuItem('Alunos', Icons.people, '/alunos'),
+        _SidebarMenuItem(
+          'Frequência do Aluno',
+          Icons.check_circle_outline,
+          '/frequencia_aluno',
+        ),
+        _SidebarMenuItem('Boletins', Icons.assignment, '/boletins'),
+        _SidebarMenuItem(
+          'Material Escolar',
+          Icons.menu_book,
+          '/material_escolar',
+        ),
       ];
     case 'medico':
       return const [
-        _SidebarMenuItem('Dashboard', Icons.dashboard),
-        _SidebarMenuItem('Pacientes', Icons.people),
-        _SidebarMenuItem('Receitas', Icons.receipt_long),
-        _SidebarMenuItem('Consultas', Icons.calendar_today),
+        _SidebarMenuItem('Dashboard', Icons.dashboard, '/dashboard'),
+        _SidebarMenuItem('Pacientes', Icons.people, '/pacientes'),
+        _SidebarMenuItem('Receitas', Icons.receipt_long, '/receitas'),
+        _SidebarMenuItem('Consultas', Icons.calendar_today, '/consultas'),
       ];
     default:
-      return const [
-        _SidebarMenuItem('Dashboard', Icons.dashboard),
-        _SidebarMenuItem('Saúde', Icons.medical_services),
-        _SidebarMenuItem('Feed', Icons.feed),
-        _SidebarMenuItem('Educação', Icons.school),
-        _SidebarMenuItem('Notificações', Icons.notifications),
+      return [
+        const _SidebarMenuItem('Dashboard', Icons.dashboard, '/dashboard'),
+        _SidebarMenuItem(
+          'Saúde',
+          Icons.medical_services,
+          SaudePage.routeMedicos,
+        ),
+        const _SidebarMenuItem('Feed', Icons.feed, '/feed'),
+        const _SidebarMenuItem('Educação', Icons.school, '/escolas'),
+        const _SidebarMenuItem(
+          'Notificações',
+          Icons.notifications,
+          '/notificacoes',
+        ),
       ];
   }
 }
