@@ -13,54 +13,71 @@ class AlunosController extends GetxController {
 
   final alunos = [
     {
+      'image':
+          'https://tse3.mm.bing.net/th/id/OIP.lXIsTLMkqShuTbbW2jQKegHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
       'nome': 'Lucas Martins',
       'turma': '5º Ano A',
       'idade': 10,
       'matricula': '2023A001',
     },
     {
+      'image':
+          'https://tse4.mm.bing.net/th/id/OIP.nKB_3t2gQF-NOLCzp2M9vwAAAA?w=358&h=626&rs=1&pid=ImgDetMain&o=7&rm=3',
       'nome': 'Julia Rocha',
       'turma': '4º Ano B',
       'idade': 9,
       'matricula': '2023B002',
     },
     {
+      'image':
+          'https://tse4.mm.bing.net/th/id/OIP.dEhIq6xfut-aue6lZMHSXAHaHa?w=626&h=626&rs=1&pid=ImgDetMain&o=7&rm=3',
       'nome': 'Pedro Henrique',
       'turma': '3º Ano C',
       'idade': 8,
       'matricula': '2023C003',
     },
     {
+      'image':
+          'https://tse3.mm.bing.net/th/id/OIP.vxAd-FRBhU0KhqLMgy8CEAHaNJ?rs=1&pid=ImgDetMain&o=7&rm=3',
       'nome': 'Ana Beatriz',
       'turma': '5º Ano A',
       'idade': 10,
       'matricula': '2023A004',
     },
     {
+      'image': '',
       'nome': 'Carlos Eduardo',
       'turma': '2º Ano D',
       'idade': 7,
       'matricula': '2023D005',
     },
     {
+      'image':
+          'https://th.bing.com/th/id/OIP.9fcs_Xvf2H4Qh058C4xcsAAAAA?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3',
       'nome': 'Mariana Silva',
       'turma': '1º Ano C',
       'idade': 6,
       'matricula': '2023C006',
     },
     {
+      'image':
+          'https://media.istockphoto.com/id/474947550/pt/foto/menino-de-cinco-anos-de-idade.jpg?s=612x612&w=0&k=20&c=q0xh4Pe7qC_PSfGbop3zWZM2fqWqsAs2jFlevkrduCE=',
       'nome': 'Rafael Lima',
       'turma': '3º Ano B',
       'idade': 8,
       'matricula': '2023B007',
     },
     {
+      'image':
+          'https://tse4.mm.bing.net/th/id/OIP.DWrtPjqB5mJIVoG5a4EjJQHaE8?w=626&h=418&rs=1&pid=ImgDetMain&o=7&rm=3',
       'nome': 'Isabela Fernandes',
       'turma': '4º Ano A',
       'idade': 9,
       'matricula': '2023A008',
     },
     {
+      'image':
+          'https://tse2.mm.bing.net/th/id/OIP.rpQ2kvyeoNebXgZOMN3LkAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3',
       'nome': 'João Pedro',
       'turma': '5º Ano B',
       'idade': 10,
@@ -123,6 +140,7 @@ class AlunosController extends GetxController {
 
   /// Mostrar detalhes do aluno
   void showAlunoDetails(Map<String, dynamic> aluno) {
+    final String image = aluno['image'];
     final String nome = aluno['nome'];
     final String turma = aluno['turma'];
     final int idade = aluno['idade'];
@@ -154,11 +172,12 @@ class AlunosController extends GetxController {
                       ),
                     ),
                     child: ClipOval(
-                      child: Image.asset(
-                        _getAlunoFoto(nome),
+                      child: Image.network(
+                        image,
                         width: 100,
                         height: 100,
                         fit: BoxFit.cover,
+
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
                             width: 100,
@@ -378,23 +397,34 @@ class AlunosController extends GetxController {
     );
   }
 
-  String _getAlunoFoto(String nome) {
-    // Mapeamento de nomes para fotos de crianças
-    final fotosMap = {
-      'Lucas Martins': 'assets/images/children/child1.jpg',
-      'Julia Rocha': 'assets/images/children/child2.jpg',
-      'Pedro Henrique': 'assets/images/children/child3.jpg',
-      'Ana Beatriz': 'assets/images/children/child4.jpg',
-      'Carlos Eduardo': 'assets/images/children/child5.jpg',
-      'Mariana Silva': 'assets/images/children/child6.jpg',
-      'Rafael Lima': 'assets/images/children/child7.jpg',
-      'Isabela Fernandes': 'assets/images/children/child8.jpg',
-      'João Pedro': 'assets/images/children/child9.jpg',
-      'Laura Mendes': 'assets/images/children/child10.jpg',
-    };
+  //   String _getAlunoFoto(String nome) {
+  //     // Mapeamento de nomes para fotos de crianças usando URLs confiáveis
+  //     final fotosMap = {
+  //       'Lucas Martins':
+  //           'https://api.dicebear.com/7.x/avataaars/svg?seed=Lucas&backgroundColor=b6e3f4',
+  //       'Julia Rocha':
+  //           'https://api.dicebear.com/7.x/avataaars/svg?seed=Julia&backgroundColor=ffdfbf',
+  //       'Pedro Henrique':
+  //           'https://api.dicebear.com/7.x/avataaars/svg?seed=Pedro&backgroundColor=c0aede',
+  //       'Ana Beatriz':
+  //           'https://api.dicebear.com/7.x/avataaars/svg?seed=Ana&backgroundColor=ffd5dc',
+  //       'Carlos Eduardo':
+  //           'https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos&backgroundColor=b6e3f4',
+  //       'Mariana Silva':
+  //           'https://api.dicebear.com/7.x/avataaars/svg?seed=Mariana&backgroundColor=ffdfbf',
+  //       'Rafael Lima':
+  //           'https://api.dicebear.com/7.x/avataaars/svg?seed=Rafael&backgroundColor=c0aede',
+  //       'Isabela Fernandes':
+  //           'https://api.dicebear.com/7.x/avataaars/svg?seed=Isabela&backgroundColor=ffd5dc',
+  //       'João Pedro':
+  //           'https://api.dicebear.com/7.x/avataaars/svg?seed=Joao&backgroundColor=b6e3f4',
+  //       'Laura Mendes':
+  //           'https://api.dicebear.com/7.x/avataaars/svg?seed=Laura&backgroundColor=ffdfbf',
+  //     };
 
-    return fotosMap[nome] ?? 'assets/images/children/default_child.jpg';
-  }
+  //     return fotosMap[nome] ??
+  //         'https://api.dicebear.com/7.x/avataaars/svg?seed=Default&backgroundColor=b6e3f4';
+  //   }
 }
 
 class _DetailRow extends StatelessWidget {

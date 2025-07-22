@@ -38,12 +38,6 @@ class AlunosPage extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.people,
-                        color: AppColors.primaryDark,
-                        size: 28,
-                      ),
-                      const SizedBox(width: 12),
                       const Text(
                         'Alunos',
                         style: TextStyle(

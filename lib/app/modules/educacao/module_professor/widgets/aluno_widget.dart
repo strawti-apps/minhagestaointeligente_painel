@@ -9,6 +9,7 @@ class AlunoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String image = alunoData['image'] ?? '';
     final String nome = alunoData['nome'] ?? '';
     final String turma = alunoData['turma'] ?? '';
     final int idade = alunoData['idade'] ?? 0;
@@ -40,10 +41,11 @@ class AlunoWidget extends StatelessWidget {
                 ),
                 child: ClipOval(
                   child: Image.network(
-                    _getAlunoFoto(nome),
+                    image,
                     width: 80,
                     height: 80,
                     fit: BoxFit.cover,
+
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
                         width: 80,
@@ -182,26 +184,32 @@ class AlunoWidget extends StatelessWidget {
   }
 
   String _getAlunoFoto(String nome) {
-    // Mapeamento de nomes para fotos de crianças
+    // Mapeamento de nomes para fotos de crianças usando URLs confiáveis
     final fotosMap = {
       'Lucas Martins':
-          'https://img.freepik.com/vetores-premium/desenho-de-rosto-de-menino-bonito_18591-41511.jpg?size=626&ext=jpg',
+          'https://api.dicebear.com/7.x/avataaars/svg?seed=Lucas&backgroundColor=b6e3f4',
       'Julia Rocha':
-          'https://img.freepik.com/vetores-premium/desenho-de-rosto-de-menina-cute_18591-41516.jpg',
-      'Pedro Henrique': 'assets/images/children/child3.jpg',
-      'Ana Beatriz': 'assets/images/children/child4.jpg',
-      'Carlos Eduardo': 'assets/images/children/child5.jpg',
+          'https://api.dicebear.com/7.x/avataaars/svg?seed=Julia&backgroundColor=ffdfbf',
+      'Pedro Henrique':
+          'https://api.dicebear.com/7.x/avataaars/svg?seed=Pedro&backgroundColor=c0aede',
+      'Ana Beatriz':
+          'https://api.dicebear.com/7.x/avataaars/svg?seed=Ana&backgroundColor=ffd5dc',
+      'Carlos Eduardo':
+          'https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos&backgroundColor=b6e3f4',
       'Mariana Silva':
-          'https://image.freepik.com/vetores-gratis/desenho-de-rosto-de-menina-cute_18591-41514.jpg',
-      'Rafael Lima': 'assets/images/children/child7.jpg',
+          'https://api.dicebear.com/7.x/avataaars/svg?seed=Mariana&backgroundColor=ffdfbf',
+      'Rafael Lima':
+          'https://api.dicebear.com/7.x/avataaars/svg?seed=Rafael&backgroundColor=c0aede',
       'Isabela Fernandes':
-          'https://img.freepik.com/vetores-gratis/menina-com-desenho-de-rosto-de-cabelo-vermelho_1308-141052.jpg?w=900&t=st=1694565349~exp=1694565949~hmac=dad770127057a27054e4bd3acdcf3338c2c356ff9c960a13216448b1112e7840',
+          'https://api.dicebear.com/7.x/avataaars/svg?seed=Isabela&backgroundColor=ffd5dc',
       'João Pedro':
-          'https://img.freepik.com/vetores-premium/desenho-de-rosto-de-menino-bonito_18591-41511.jpg?size=626&ext=jpg',
-      'Laura Mendes': 'assets/images/children/child10.jpg',
+          'https://api.dicebear.com/7.x/avataaars/svg?seed=Joao&backgroundColor=b6e3f4',
+      'Laura Mendes':
+          'https://api.dicebear.com/7.x/avataaars/svg?seed=Laura&backgroundColor=ffdfbf',
     };
 
-    return fotosMap[nome] ?? 'assets/images/children/default_child.jpg';
+    return fotosMap[nome] ??
+        'https://api.dicebear.com/7.x/avataaars/svg?seed=Default&backgroundColor=b6e3f4';
   }
 }
 

@@ -37,12 +37,6 @@ class BoletinsPage extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.assignment,
-                        color: AppColors.primaryDark,
-                        size: 28,
-                      ),
-                      const SizedBox(width: 12),
                       const Text(
                         'Boletins Escolares',
                         style: TextStyle(

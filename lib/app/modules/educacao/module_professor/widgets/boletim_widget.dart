@@ -9,6 +9,7 @@ class BoletimWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String image = boletimData['image'] ?? '';
     final String aluno = boletimData['aluno'] ?? '';
     final Map<String, dynamic> boletim = boletimData['boletim'] ?? {};
 
@@ -50,16 +51,28 @@ class BoletimWidget extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    CircleAvatar(
-                      backgroundColor: AppColors.textPrimary,
-                      child: Text(
-                        aluno.isNotEmpty ? aluno[0].toUpperCase() : 'A',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    ClipOval(
+                      child: Image.network(
+                        image,
+                        height: 50,
+                        width: 50,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return CircleAvatar(
+                            radius: 25,
+                            backgroundColor: AppColors.textPrimary,
+                            child: Text(
+                              aluno.isNotEmpty ? aluno[0].toUpperCase() : 'A',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
+
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(

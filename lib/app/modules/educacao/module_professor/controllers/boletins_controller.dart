@@ -13,6 +13,8 @@ class BoletinsController extends GetxController {
 
   final boletins = [
     {
+      'image':
+          'https://tse3.mm.bing.net/th/id/OIP.lXIsTLMkqShuTbbW2jQKegHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
       'aluno': 'Lucas Martins',
       'boletim': {
         'Matemática': {
@@ -38,6 +40,8 @@ class BoletinsController extends GetxController {
       },
     },
     {
+      'image':
+          'https://tse4.mm.bing.net/th/id/OIP.nKB_3t2gQF-NOLCzp2M9vwAAAA?w=358&h=626&rs=1&pid=ImgDetMain&o=7&rm=3',
       'aluno': 'Julia Rocha',
       'boletim': {
         'Matemática': {
@@ -63,6 +67,8 @@ class BoletinsController extends GetxController {
       },
     },
     {
+      'image':
+          'https://tse4.mm.bing.net/th/id/OIP.dEhIq6xfut-aue6lZMHSXAHaHa?w=626&h=626&rs=1&pid=ImgDetMain&o=7&rm=3',
       'aluno': 'Pedro Henrique',
       'boletim': {
         'Matemática': {
@@ -88,6 +94,8 @@ class BoletinsController extends GetxController {
       },
     },
     {
+      'image':
+          'https://tse3.mm.bing.net/th/id/OIP.vxAd-FRBhU0KhqLMgy8CEAHaNJ?rs=1&pid=ImgDetMain&o=7&rm=3',
       'aluno': 'Ana Beatriz',
       'boletim': {
         'Matemática': {
@@ -138,6 +146,8 @@ class BoletinsController extends GetxController {
       },
     },
     {
+      'image':
+          'https://th.bing.com/th/id/OIP.9fcs_Xvf2H4Qh058C4xcsAAAAA?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3',
       'aluno': 'Mariana Silva',
       'boletim': {
         'Matemática': {
@@ -163,6 +173,8 @@ class BoletinsController extends GetxController {
       },
     },
     {
+      'image':
+          'https://media.istockphoto.com/id/474947550/pt/foto/menino-de-cinco-anos-de-idade.jpg?s=612x612&w=0&k=20&c=q0xh4Pe7qC_PSfGbop3zWZM2fqWqsAs2jFlevkrduCE=',
       'aluno': 'Rafael Lima',
       'boletim': {
         'Matemática': {
@@ -188,6 +200,8 @@ class BoletinsController extends GetxController {
       },
     },
     {
+      'image':
+          'https://tse4.mm.bing.net/th/id/OIP.DWrtPjqB5mJIVoG5a4EjJQHaE8?w=626&h=418&rs=1&pid=ImgDetMain&o=7&rm=3',
       'aluno': 'Isabela Fernandes',
       'boletim': {
         'Matemática': {
@@ -213,6 +227,8 @@ class BoletinsController extends GetxController {
       },
     },
     {
+      'image':
+          'https://tse2.mm.bing.net/th/id/OIP.rpQ2kvyeoNebXgZOMN3LkAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3',
       'aluno': 'João Pedro',
       'boletim': {
         'Matemática': {
