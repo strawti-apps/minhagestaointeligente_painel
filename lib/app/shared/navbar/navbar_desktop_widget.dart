@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../modules/auth/pages/login_email_page.dart';
+import '../../modules/educacao/module_professor/pages/alunos_page.dart';
+import '../../modules/educacao/module_professor/pages/boletins_page.dart';
+import '../../modules/educacao/module_professor/pages/frequencia_aluno_page.dart';
+import '../../modules/educacao/module_professor/pages/material_escolar_page.dart';
 import '../../modules/saude/saude_page.dart';
 import '../../shared/widgets/app_logo.dart';
 import '../../themes/app_colors.dart';
@@ -16,7 +20,7 @@ class NavbarDesktopWidget extends StatefulWidget {
 class _NavbarDesktopWidgetState extends State<NavbarDesktopWidget> {
   @override
   Widget build(BuildContext context) {
-    final String userType = Get.parameters['type'] ?? 'admin';
+    final String userType = (Get.parameters['type'] ?? 'admin').toString();
     final menuItems = _getMenuItems(userType);
     final String currentRoute = Get.currentRoute;
 
@@ -119,7 +123,9 @@ class _NavbarDesktopWidgetState extends State<NavbarDesktopWidget> {
                       alpha: 0.4,
                     ),
                     child: Text(
-                      userType.substring(0, 1).toUpperCase(),
+                      userType.isNotEmpty
+                          ? userType.substring(0, 1).toUpperCase()
+                          : '?',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
@@ -129,7 +135,9 @@ class _NavbarDesktopWidgetState extends State<NavbarDesktopWidget> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      userType[0].toUpperCase() + userType.substring(1),
+                      userType.isNotEmpty
+                          ? userType[0].toUpperCase() + userType.substring(1)
+                          : 'Usuário',
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -166,19 +174,19 @@ class _SidebarMenuItem {
 List<_SidebarMenuItem> _getMenuItems(String type) {
   switch (type) {
     case 'professor':
-      return const [
-        _SidebarMenuItem('Dashboard', Icons.dashboard, '/dashboard'),
-        _SidebarMenuItem('Alunos', Icons.people, '/alunos'),
+      return [
+        const _SidebarMenuItem('Dashboard', Icons.dashboard, '/dashboard'),
+        _SidebarMenuItem('Alunos', Icons.people, AlunosPage.route),
         _SidebarMenuItem(
           'Frequência do Aluno',
           Icons.check_circle_outline,
-          '/frequencia_aluno',
+          FrequenciaAlunoPage.route,
         ),
-        _SidebarMenuItem('Boletins', Icons.assignment, '/boletins'),
+        _SidebarMenuItem('Boletins', Icons.assignment, BoletinsPage.route),
         _SidebarMenuItem(
           'Material Escolar',
           Icons.menu_book,
-          '/material_escolar',
+          MaterialEscolarPage.route,
         ),
       ];
     case 'medico':
