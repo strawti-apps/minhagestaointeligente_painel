@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minha_gestao_inteligente_painel/app/shared/widgets/app_button_default.dart';
 
 import '../../../../themes/app_colors.dart';
 
@@ -196,29 +197,19 @@ class ReceitaWidget extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: OutlinedButton(
-                      onPressed: onTap,
-                      style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                      ),
-                      child: const Text(
-                        'Ver Detalhes',
-                        style: TextStyle(fontSize: 12),
-                      ),
+                    child: AppButtonDefault(
+                      onTap: onTap,
+                      borderColor: AppColors.primaryDark,
+                      buttonColor: AppColors.card,
+                      textColor: AppColors.primaryDark,
+                      text: 'Ver Detalhes',
                     ),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
-                    child: ElevatedButton(
-                      onPressed: onSegundaVia,
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        backgroundColor: AppColors.primaryDark,
-                      ),
-                      child: const Text(
-                        '2ª Via',
-                        style: TextStyle(fontSize: 12, color: Colors.white),
-                      ),
+                    child: AppButtonDefault(
+                      onTap: onSegundaVia,
+                      text: '2ª Via',
                     ),
                   ),
                 ],

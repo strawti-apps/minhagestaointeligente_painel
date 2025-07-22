@@ -31,6 +31,7 @@ class ConsultasController extends GetxController with LoaderManager {
         'status': 'Realizada',
         'paciente': {
           'nome': 'Maria Silva Santos',
+          'image': '',
           'idade': 45,
           'especialidade': 'Cardiologia',
         },

@@ -24,6 +24,7 @@ class PacientesController extends GetxController with LoaderManager {
   void _initializePacientes() {
     pacientes = [
       {
+        'image': '',
         'nome': 'Maria Silva Santos',
         'idade': 45,
         'especialidade': 'Cardiologia',
@@ -172,6 +173,7 @@ class PacientesController extends GetxController with LoaderManager {
         ],
       },
       {
+        'image': '',
         'nome': 'Roberto Almeida',
         'idade': 40,
         'especialidade': 'Neurologia',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/widgets/app_button_default.dart';
 import '../../../../themes/app_colors.dart';
 
 class ConsultaWidget extends StatelessWidget {
@@ -160,21 +161,10 @@ class ConsultaWidget extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-
-              // Botão de ação
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: onTap,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryDark,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                  ),
-                  child: const Text(
-                    'Ver Detalhes',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
+              AppButtonDefault(
+                onTap: onTap,
+                text: 'Ver Detalhes',
+                paddingVertical: 5,
               ),
             ],
           ),
