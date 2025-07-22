@@ -30,32 +30,6 @@ class AdminDashboardController extends GetxController with LoaderManager {
   final int _totalStudents = 120;
   final int _totalQuizzes = 8;
   final String _averageProgress = '75%';
-  final List<RecentActivity> _recentActivities = [
-    RecentActivity(
-      userName: 'Turma',
-      initials: 'T',
-      description: 'Nova turma criada: Matemática',
-      date: DateTime.now().subtract(const Duration(days: 1)),
-      status: 'Novo',
-      statusColor: Colors.blue,
-    ),
-    RecentActivity(
-      userName: 'Quiz',
-      initials: 'Q',
-      description: 'Novo questionário: Prova 1',
-      date: DateTime.now().subtract(const Duration(days: 2)),
-      status: 'Publicado',
-      statusColor: Colors.purple,
-    ),
-    RecentActivity(
-      userName: 'Aluno',
-      initials: 'A',
-      description: 'Novo aluno cadastrado',
-      date: DateTime.now().subtract(const Duration(days: 3)),
-      status: 'Novo',
-      statusColor: Colors.green,
-    ),
-  ];
 
   // Getters
   String? get errorMessage => _errorMessage;
@@ -64,7 +38,7 @@ class AdminDashboardController extends GetxController with LoaderManager {
   int get totalStudents => _totalStudents;
   int get totalQuizzes => _totalQuizzes;
   String get averageProgress => _averageProgress;
-  List<RecentActivity> get recentActivities => _recentActivities;
+
   bool get hasError => _errorMessage != null;
 
   @override

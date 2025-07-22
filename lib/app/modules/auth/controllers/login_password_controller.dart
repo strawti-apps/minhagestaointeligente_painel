@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../../infra/models/user_model.dart';
+import '../../../infra/services/user_service.dart';
 import '../../../shared/mixins/loader_manager.dart';
 import '../forms/password_form.dart';
 import '../pages/recovery_password_page.dart';
@@ -65,6 +67,26 @@ class LoginPasswordController extends GetxController with LoaderManager {
       // Salva o tipo de acesso e email para a dashboard
       box.write('user_type', user['type']);
       box.write('user_email', user['email']);
+
+      // Criar e definir o usuário no UserService
+      final userModel = UserModel(
+        id: 1,
+        authUserId: 'mocked',
+        firstName:
+            user['type'] == 'medico'
+                ? 'Médico'
+                : user['type'] == 'professor'
+                ? 'Professor'
+                : 'Admin',
+        lastName: null,
+        email: user['email']!,
+        role: user['type']!,
+        createdAt: DateTime.now(),
+        mustChangePassword: false,
+      );
+
+      UserService.setMockUser(userModel);
+
       // Navega para a dashboard passando os parâmetros
       Get.offAllNamed(
         '/dashboard',

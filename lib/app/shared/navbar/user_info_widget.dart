@@ -230,6 +230,7 @@ class UserInfoHelper {
     );
 
     if (confirmed == true) {
+      UserService.clearUser();
       Get.offAllNamed(LoginEmailPage.route);
     }
   }

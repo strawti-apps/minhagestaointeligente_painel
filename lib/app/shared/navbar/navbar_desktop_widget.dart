@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../infra/services/user_service.dart';
 import '../../modules/auth/pages/login_email_page.dart';
 import '../../modules/educacao/module_professor/pages/alunos_page.dart';
 import '../../modules/educacao/module_professor/pages/boletins_page.dart';
@@ -20,7 +21,8 @@ class NavbarDesktopWidget extends StatefulWidget {
 class _NavbarDesktopWidgetState extends State<NavbarDesktopWidget> {
   @override
   Widget build(BuildContext context) {
-    final String userType = (Get.parameters['type'] ?? 'admin').toString();
+    final String userType =
+        UserService.currentUserType ?? (Get.parameters['type'] ?? '');
     final menuItems = _getMenuItems(userType);
     final String currentRoute = Get.currentRoute;
 
@@ -70,7 +72,19 @@ class _NavbarDesktopWidgetState extends State<NavbarDesktopWidget> {
                             borderRadius: BorderRadius.circular(10),
                             onTap: () {
                               if (Get.currentRoute != menuItems[i].route) {
-                                Get.toNamed(menuItems[i].route);
+                                // Preservar o type na navegação
+                                final parameters = <String, String>{};
+                                if (userType.isNotEmpty) {
+                                  parameters['type'] = userType;
+                                }
+                                if (UserService.currentUser?.email != null) {
+                                  parameters['email'] =
+                                      UserService.currentUser!.email;
+                                }
+                                Get.toNamed(
+                                  menuItems[i].route,
+                                  parameters: parameters,
+                                );
                               }
                             },
                             child: Container(
@@ -151,7 +165,10 @@ class _NavbarDesktopWidgetState extends State<NavbarDesktopWidget> {
                       size: 20,
                       color: Colors.black,
                     ),
-                    onPressed: () => Get.offAllNamed(LoginEmailPage.route),
+                    onPressed: () {
+                      UserService.clearUser();
+                      Get.offAllNamed(LoginEmailPage.route);
+                    },
                     tooltip: 'Sair',
                   ),
                 ],

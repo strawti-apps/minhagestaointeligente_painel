@@ -37,7 +37,18 @@ class NavbarNavigationController extends GetxController {
 
     currentIndex = index;
     update();
-    Get.toNamed(targetRoute);
+
+    // Preservar o type na navegação
+    final parameters = <String, String>{};
+    final userType = UserService.currentUserType;
+    if (userType != null && userType.isNotEmpty) {
+      parameters['type'] = userType;
+    }
+    if (UserService.currentUser?.email != null) {
+      parameters['email'] = UserService.currentUser!.email;
+    }
+
+    Get.toNamed(targetRoute, parameters: parameters);
   }
 
   void _syncCurrentIndexFromRoute() {
@@ -65,9 +76,5 @@ class NavbarNavigationController extends GetxController {
 
     _updateNavItems();
     _syncCurrentIndexFromRoute();
-
-    debugPrint(
-      'NavbarController: Navbar atualizada com ${_currentNavItems.length} itens',
-    );
   }
 }
