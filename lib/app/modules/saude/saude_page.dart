@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:minha_gestao_inteligente_painel/app/themes/app_colors.dart';
 
 import '../../shared/navbar/navbar_desktop_widget.dart';
 import '../../shared/navbar/navbar_mobile_widget.dart';
@@ -32,18 +33,64 @@ class SaudePage extends StatelessWidget {
             child: GetBuilder<SaudeController>(
               builder: (controller) {
                 switch (controller.selectedSubModule) {
-                  case 'hospital_create':
-                    return const HospitalCreateEditWidget(isEditing: false);
                   case 'hospitais':
                     return Column(
                       children: [
                         const HospitalHeaderWidget(),
-                        // Aqui você pode adicionar um HospitalSearchField se desejar
-                        // const HospitalSearchField(),
-                        // E a lista de hospitais
-                        // Expanded(child: HospitaisListWidget(controller: controller)),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: controller.filteredHospitais.length,
+                            itemBuilder: (context, index) {
+                              final hospital =
+                                  controller.filteredHospitais[index];
+                              return Card(
+                                elevation: 2,
+                                color: AppColors.card,
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 8,
+                                ),
+                                child: ListTile(
+                                  title: Text(hospital.nome),
+                                  subtitle: Text(hospital.endereco),
+                                  trailing: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.edit,
+                                          color: Colors.blue,
+                                        ),
+                                        onPressed:
+                                            () => controller.goToEditHospital(
+                                              hospital,
+                                            ),
+                                        tooltip: 'Editar',
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
+                                        ),
+                                        onPressed:
+                                            () => controller.deleteHospital(
+                                              hospital,
+                                            ),
+                                        tooltip: 'Remover',
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
                       ],
                     );
+                  case 'hospital_create':
+                    return const HospitalCreateEditWidget(isEditing: false);
+                  case 'hospital_edit':
+                    return const HospitalCreateEditWidget(isEditing: true);
                   case 'medico_create':
                     return const MedicoCreateEditWidget(isEditing: false);
                   case 'medico_edit':

@@ -21,7 +21,8 @@ class NavbarNavigationController extends GetxController {
 
   void _updateNavItems() {
     final previousCount = _currentNavItems.length;
-    _currentNavItems = sidebarNavItems;
+    final user = UserService.currentUser;
+    _currentNavItems = user != null ? getNavItemsForType(user.role) : [];
     debugPrint(
       'NavbarController: Items atualizados. Anterior: $previousCount, Atual: ${_currentNavItems.length}',
     );

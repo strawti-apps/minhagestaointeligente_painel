@@ -33,7 +33,8 @@ class HospitalHeaderWidget extends StatelessWidget {
                   ),
                   SizedBox(width: 10),
                   AppButtonDefault(
-                    paddingVertical: 5,
+                    width: 150,
+                    usingJustPadding: false,
                     onTap: controller.goToCreateHospital,
                     icon: Icons.add,
                     text: 'Novo Hospital',

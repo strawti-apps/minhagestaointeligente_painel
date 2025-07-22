@@ -109,12 +109,83 @@ List<SidebarNavItem> get sidebarNavItems {
   if (currentUser == null) {
     return [];
   }
-  final userRole = currentUser.role.toLowerCase();
-  if (userRole == 'professor' || userRole == 'teacher') {
-    return _professorNavItems;
-  } else if (userRole == 'medico') {
-    return _medicoNavItems;
-  } else {
-    return _adminNavItems;
+  return getNavItemsForType(currentUser.role);
+}
+
+// Função utilitária para obter os itens de navegação igual à desktop
+List<SidebarNavItem> getNavItemsForType(String type) {
+  switch (type.toLowerCase()) {
+    case 'professor':
+    case 'teacher':
+      return [
+        SidebarNavItem(
+          icon: Icons.dashboard,
+          label: 'Dashboard',
+          route: '/dashboard',
+        ),
+        SidebarNavItem(icon: Icons.people, label: 'Alunos', route: '/alunos'),
+        SidebarNavItem(
+          icon: Icons.check_circle_outline,
+          label: 'Frequência do Aluno',
+          route: '/frequencia_aluno',
+        ),
+        SidebarNavItem(
+          icon: Icons.assignment,
+          label: 'Boletins',
+          route: '/boletins',
+        ),
+        SidebarNavItem(
+          icon: Icons.menu_book,
+          label: 'Material Escolar',
+          route: '/material_escolar',
+        ),
+      ];
+    case 'medico':
+      return [
+        SidebarNavItem(
+          icon: Icons.dashboard,
+          label: 'Dashboard',
+          route: '/dashboard',
+        ),
+        SidebarNavItem(
+          icon: Icons.people,
+          label: 'Pacientes',
+          route: '/pacientes',
+        ),
+        SidebarNavItem(
+          icon: Icons.receipt_long,
+          label: 'Receitas',
+          route: '/receitas',
+        ),
+        SidebarNavItem(
+          icon: Icons.calendar_today,
+          label: 'Consultas',
+          route: '/consultas',
+        ),
+      ];
+    default:
+      return [
+        SidebarNavItem(
+          icon: Icons.dashboard,
+          label: 'Dashboard',
+          route: '/dashboard',
+        ),
+        SidebarNavItem(
+          icon: Icons.medical_services,
+          label: 'Saúde',
+          route: '/medicos',
+        ),
+        SidebarNavItem(icon: Icons.feed, label: 'Feed', route: '/feed'),
+        SidebarNavItem(
+          icon: Icons.school,
+          label: 'Educação',
+          route: '/escolas',
+        ),
+        SidebarNavItem(
+          icon: Icons.notifications,
+          label: 'Notificações',
+          route: '/notificacoes',
+        ),
+      ];
   }
 }

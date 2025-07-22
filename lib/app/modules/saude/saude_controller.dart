@@ -106,6 +106,16 @@ class SaudeController extends GetxController {
       nome: 'Hospital Regional',
       endereco: 'Av. Brasil, 200',
     ),
+    HospitalModel(
+      id: 3,
+      nome: 'Hospital Santa Luzia',
+      endereco: 'Rua das Flores, 300',
+    ),
+    HospitalModel(
+      id: 4,
+      nome: 'Hospital Vida Nova',
+      endereco: 'Av. das Nações, 400',
+    ),
   ];
   List<HospitalModel> filteredHospitais = [];
 
@@ -114,6 +124,7 @@ class SaudeController extends GetxController {
     super.onInit();
     filteredMedicos = List.from(medicos);
     filteredPlantoes = List.from(plantoes);
+    filteredHospitais = List.from(hospitais);
   }
 
   // CRUD Médicos
@@ -334,6 +345,20 @@ class SaudeController extends GetxController {
     hospitais.add(novo);
     filteredHospitais.add(novo);
     backToHospitaisList();
+  }
+
+  void goToEditHospital(HospitalModel hospital) {
+    hospitalToEdit = hospital;
+    hospitalNomeController.text = hospital.nome;
+    hospitalEnderecoController.text = hospital.endereco;
+    selectedSubModule = 'hospital_edit';
+    update();
+  }
+
+  void deleteHospital(HospitalModel hospital) {
+    hospitais.removeWhere((h) => h.id == hospital.id);
+    filteredHospitais.removeWhere((h) => h.id == hospital.id);
+    update();
   }
 
   void updateHospital() {
