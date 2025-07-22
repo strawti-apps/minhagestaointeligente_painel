@@ -12,68 +12,161 @@ class PlantaoHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<SaudeController>(
       builder: (controller) {
-        return Container(
-          padding: const EdgeInsets.all(20),
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 10,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Row(
+        // Calcular estatísticas dos plantões
+        final totalPlantoes = controller.plantoes.length;
+        final plantoesDiurnos =
+            controller.plantoes
+                .where((p) => p.horario.startsWith('08:00'))
+                .length;
+        final plantoesNoturnos =
+            controller.plantoes
+                .where((p) => p.horario.startsWith('18:00'))
+                .length;
+        final medicosUnicos =
+            controller.plantoes.map((p) => p.medicoNome).toSet().length;
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Plantões',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.textPrimary,
-                      ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Gerenciar Plantões',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  Spacer(),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: AppButtonDefault(
+                            onTap: controller.goToMedicos,
+                            icon: Icons.people,
+                            text: 'Ver Médicos',
+                            paddingVertical: 5,
+                            isValid: true,
+                            usingJustPadding: false,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: AppButtonDefault(
+                            onTap: controller.goToHospitais,
+                            icon: Icons.local_hospital,
+                            text: 'Ver Hospitais',
+                            paddingVertical: 5,
+                            isValid: true,
+                            usingJustPadding: false,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: AppButtonDefault(
+                            onTap: controller.goToCreatePlantao,
+                            icon: Icons.add,
+                            text: 'Novo Plantão',
+                            paddingVertical: 5,
+                            isValid: true,
+                            usingJustPadding: false,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      '${controller.filteredPlantoes.length} plantão(ões) encontrado(s)',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.textSecondary,
-                      ),
+                  ),
+                ],
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Row(
+                  children: [
+                    _buildStatCard(
+                      icon: Icons.access_time,
+                      title: 'Total de Plantões',
+                      value: totalPlantoes.toString(),
+                      color: AppColors.primaryDark,
+                    ),
+                    const SizedBox(width: 16),
+                    _buildStatCard(
+                      icon: Icons.wb_sunny,
+                      title: 'Plantões Diurnos',
+                      value: plantoesDiurnos.toString(),
+                      color: Colors.orange,
+                    ),
+                    const SizedBox(width: 16),
+                    _buildStatCard(
+                      icon: Icons.nightlight,
+                      title: 'Plantões Noturnos',
+                      value: plantoesNoturnos.toString(),
+                      color: Colors.indigo,
+                    ),
+                    const SizedBox(width: 16),
+                    _buildStatCard(
+                      icon: Icons.people,
+                      title: 'Médicos em Plantão',
+                      value: medicosUnicos.toString(),
+                      color: Colors.black,
                     ),
                   ],
                 ),
-              ),
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: controller.goToMedicos,
-                    icon: Icon(Icons.close, color: AppColors.primaryDark),
-                    tooltip: 'Voltar',
-                  ),
-                  const SizedBox(width: 8),
-                  AppButtonDefault(
-                    onTap: controller.goToCreatePlantao,
-                    icon: Icons.add,
-                    text: 'Novo Plantão',
-                    paddingVertical: 5,
-                    isValid: true,
-                    width: 150,
-                    usingJustPadding: false,
-                  ),
-                ],
               ),
             ],
           ),
         );
       },
+    );
+  }
+
+  Widget _buildStatCard({
+    required IconData icon,
+    required String title,
+    required String value,
+    required Color color,
+  }) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: AppColors.background,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: color.withValues(alpha: 0.3)),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(icon, color: color, size: 20),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    value,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: color,
+                    ),
+                  ),
+                  Text(
+                    title,
+                    style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -64,10 +64,9 @@ class MedicoHeaderWidget extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
-          // Estatísticas dos dados mockados
+
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: const EdgeInsets.only(top: 15),
             child: Row(
               children: [
                 _buildStatCard(

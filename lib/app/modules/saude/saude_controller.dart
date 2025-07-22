@@ -207,61 +207,91 @@ class SaudeController extends GetxController {
       id: 1,
       medicoNome: 'Dra. Ana Silva Santos',
       data: '2024-06-01',
-      horario: '08:00-18:00',
+      horario: '18:00-06:00', // Noturno
     ),
     PlantaoModel(
       id: 2,
       medicoNome: 'Dr. João Carlos Souza',
       data: '2024-06-02',
-      horario: '18:00-06:00',
+      horario: '08:00-18:00', // Diurno
     ),
     PlantaoModel(
       id: 3,
       medicoNome: 'Dra. Maria Fernanda Costa',
       data: '2024-06-03',
-      horario: '08:00-18:00',
+      horario: '18:00-06:00', // Noturno
     ),
     PlantaoModel(
       id: 4,
       medicoNome: 'Dr. Roberto Almeida Lima',
       data: '2024-06-04',
-      horario: '18:00-06:00',
+      horario: '08:00-18:00', // Diurno
     ),
     PlantaoModel(
       id: 5,
       medicoNome: 'Dra. Juliana Pereira Rodrigues',
       data: '2024-06-05',
-      horario: '08:00-18:00',
+      horario: '08:00-18:00', // Diurno
     ),
     PlantaoModel(
       id: 6,
       medicoNome: 'Dr. Carlos Eduardo Mendes',
       data: '2024-06-06',
-      horario: '18:00-06:00',
+      horario: '08:00-18:00', // Diurno
     ),
     PlantaoModel(
       id: 7,
       medicoNome: 'Dra. Patricia Oliveira Silva',
       data: '2024-06-07',
-      horario: '08:00-18:00',
+      horario: '08:00-18:00', // Diurno
     ),
     PlantaoModel(
       id: 8,
       medicoNome: 'Dr. Fernando Santos Costa',
       data: '2024-06-08',
-      horario: '18:00-06:00',
+      horario: '18:00-06:00', // Noturno
     ),
     PlantaoModel(
       id: 9,
       medicoNome: 'Dra. Camila Rodrigues Alves',
       data: '2024-06-09',
-      horario: '08:00-18:00',
+      horario: '08:00-18:00', // Diurno
     ),
     PlantaoModel(
       id: 10,
       medicoNome: 'Dr. Ricardo Mendes Pereira',
       data: '2024-06-10',
-      horario: '18:00-06:00',
+      horario: '18:00-06:00', // Noturno
+    ),
+    PlantaoModel(
+      id: 11,
+      medicoNome: 'Dra. Beatriz Silva Costa',
+      data: '2024-06-11',
+      horario: '08:00-18:00', // Diurno
+    ),
+    PlantaoModel(
+      id: 12,
+      medicoNome: 'Dr. Alexandre Costa Santos',
+      data: '2024-06-12',
+      horario: '08:00-18:00', // Diurno
+    ),
+    PlantaoModel(
+      id: 13,
+      medicoNome: 'Dra. Ana Silva Santos',
+      data: '2024-06-13',
+      horario: '08:00-18:00', // Diurno
+    ),
+    PlantaoModel(
+      id: 14,
+      medicoNome: 'Dr. João Carlos Souza',
+      data: '2024-06-14',
+      horario: '18:00-06:00', // Noturno
+    ),
+    PlantaoModel(
+      id: 15,
+      medicoNome: 'Dra. Maria Fernanda Costa',
+      data: '2024-06-15',
+      horario: '08:00-18:00', // Diurno
     ),
   ];
   List<PlantaoModel> filteredPlantoes = [];
