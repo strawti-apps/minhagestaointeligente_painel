@@ -95,6 +95,7 @@ class SaudeController extends GetxController {
   final TextEditingController hospitalNomeController = TextEditingController();
   final TextEditingController hospitalEnderecoController =
       TextEditingController();
+
   List<HospitalModel> hospitais = [
     HospitalModel(
       id: 1,
