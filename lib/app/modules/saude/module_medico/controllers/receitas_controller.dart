@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:minha_gestao_inteligente_painel/app/shared/widgets/app_button_default.dart';
 
 import '../../../../shared/mixins/loader_manager.dart';
 import '../../../../themes/app_colors.dart';
@@ -49,7 +50,7 @@ class ReceitasController extends GetxController with LoaderManager {
           'idade': 62,
           'especialidade': 'Ortopedia',
           'image':
-              'https://api.dicebear.com/7.x/avataaars/svg?seed=Joao&backgroundColor=b6e3f4',
+              'https://st2.depositphotos.com/1075946/7097/i/600/depositphotos_70978195-stock-photo-attractive-50-year-old-man.jpg',
         },
         'medicamentos': [
           {
@@ -70,7 +71,7 @@ class ReceitasController extends GetxController with LoaderManager {
           'idade': 28,
           'especialidade': 'Ginecologia',
           'image':
-              'https://api.dicebear.com/7.x/avataaars/svg?seed=Ana&backgroundColor=ffdfbf',
+              'https://tse3.mm.bing.net/th/id/OIP.aJ4VKK2ohav-CmqsHPcq-wAAAA?rs=1&pid=ImgDetMain&o=7&rm=3',
         },
         'medicamentos': [
           {'nome': 'Ácido Fólico 5mg', 'posologia': '1 comprimido 1x ao dia'},
@@ -88,7 +89,7 @@ class ReceitasController extends GetxController with LoaderManager {
           'idade': 35,
           'especialidade': 'Dermatologia',
           'image':
-              'https://api.dicebear.com/7.x/avataaars/svg?seed=Pedro&backgroundColor=c0aede',
+              'https://cdn.folhape.com.br/upload/dn_arquivo/2023/10/priscila-enquadramento-capa_2.jpg',
         },
         'medicamentos': [
           {'nome': 'Pomada Betametasona', 'posologia': 'Aplicar 2x ao dia'},
@@ -105,7 +106,7 @@ class ReceitasController extends GetxController with LoaderManager {
           'idade': 55,
           'especialidade': 'Endocrinologia',
           'image':
-              'https://api.dicebear.com/7.x/avataaars/svg?seed=Lucia&backgroundColor=ffd5dc',
+              'https://tse2.mm.bing.net/th/id/OIP.1Qu77Ol87z6l-UWtYN73owAAAA?rs=1&pid=ImgDetMain&o=7&rm=3',
         },
         'medicamentos': [
           {'nome': 'Metformina 850mg', 'posologia': '1 comprimido 2x ao dia'},
@@ -165,6 +166,7 @@ class ReceitasController extends GetxController with LoaderManager {
   void gerarSegundaVia(Map<String, dynamic> receita) {
     Get.dialog(
       AlertDialog(
+        backgroundColor: AppColors.background,
         title: const Text('Segunda Via'),
         content: Text(
           'Deseja gerar uma segunda via da receita ${receita['id']}?',
@@ -172,14 +174,18 @@ class ReceitasController extends GetxController with LoaderManager {
         actions: [
           TextButton(
             onPressed: () => Get.back(),
-            child: const Text('Cancelar'),
+            child: const Text(
+              'Cancelar',
+              style: TextStyle(color: AppColors.textPrimary),
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
+          AppButtonDefault(
+            onTap: () {
               Get.back();
               _mostrarReceita(receita);
             },
-            child: const Text('Gerar'),
+            text: 'Gerar',
+            width: 90,
           ),
         ],
       ),

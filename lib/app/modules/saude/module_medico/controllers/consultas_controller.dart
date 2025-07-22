@@ -33,8 +33,6 @@ class ConsultasController extends GetxController with LoaderManager {
           'nome': 'Maria Silva Santos',
           'idade': 45,
           'especialidade': 'Cardiologia',
-          'image':
-              'https://api.dicebear.com/7.x/avataaars/svg?seed=Maria&backgroundColor=ffd5dc',
         },
         'anamnese': {
           'queixaPrincipal': 'Dor no peito há 3 dias',
@@ -75,7 +73,7 @@ class ConsultasController extends GetxController with LoaderManager {
           'idade': 62,
           'especialidade': 'Ortopedia',
           'image':
-              'https://api.dicebear.com/7.x/avataaars/svg?seed=Joao&backgroundColor=b6e3f4',
+              'https://st2.depositphotos.com/1075946/7097/i/600/depositphotos_70978195-stock-photo-attractive-50-year-old-man.jpg',
         },
         'anamnese': {
           'queixaPrincipal': 'Avaliação pós-cirurgia do joelho',
@@ -117,7 +115,7 @@ class ConsultasController extends GetxController with LoaderManager {
           'idade': 28,
           'especialidade': 'Ginecologia',
           'image':
-              'https://api.dicebear.com/7.x/avataaars/svg?seed=Ana&backgroundColor=ffdfbf',
+              'https://tse3.mm.bing.net/th/id/OIP.aJ4VKK2ohav-CmqsHPcq-wAAAA?rs=1&pid=ImgDetMain&o=7&rm=3',
         },
         'anamnese': {
           'queixaPrincipal': 'Consulta de rotina',
@@ -154,7 +152,7 @@ class ConsultasController extends GetxController with LoaderManager {
           'idade': 35,
           'especialidade': 'Dermatologia',
           'image':
-              'https://api.dicebear.com/7.x/avataaars/svg?seed=Pedro&backgroundColor=c0aede',
+              'https://cdn.folhape.com.br/upload/dn_arquivo/2023/10/priscila-enquadramento-capa_2.jpg',
         },
         'anamnese': {
           'queixaPrincipal': 'Lesão cutânea no braço direito',
@@ -190,7 +188,7 @@ class ConsultasController extends GetxController with LoaderManager {
           'idade': 55,
           'especialidade': 'Endocrinologia',
           'image':
-              'https://api.dicebear.com/7.x/avataaars/svg?seed=Lucia&backgroundColor=ffd5dc',
+              'https://tse2.mm.bing.net/th/id/OIP.1Qu77Ol87z6l-UWtYN73owAAAA?rs=1&pid=ImgDetMain&o=7&rm=3',
         },
         'anamnese': {
           'queixaPrincipal': 'Controle de diabetes',

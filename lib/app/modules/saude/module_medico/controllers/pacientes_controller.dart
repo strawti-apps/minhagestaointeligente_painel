@@ -24,8 +24,6 @@ class PacientesController extends GetxController with LoaderManager {
   void _initializePacientes() {
     pacientes = [
       {
-        'image':
-            'https://api.dicebear.com/7.x/avataaars/svg?seed=Maria&backgroundColor=ffd5dc',
         'nome': 'Maria Silva Santos',
         'idade': 45,
         'especialidade': 'Cardiologia',
@@ -55,7 +53,7 @@ class PacientesController extends GetxController with LoaderManager {
       },
       {
         'image':
-            'https://api.dicebear.com/7.x/avataaars/svg?seed=Joao&backgroundColor=b6e3f4',
+            'https://st2.depositphotos.com/1075946/7097/i/600/depositphotos_70978195-stock-photo-attractive-50-year-old-man.jpg',
         'nome': 'João Carlos Oliveira',
         'idade': 62,
         'especialidade': 'Ortopedia',
@@ -85,7 +83,7 @@ class PacientesController extends GetxController with LoaderManager {
       },
       {
         'image':
-            'https://api.dicebear.com/7.x/avataaars/svg?seed=Ana&backgroundColor=ffdfbf',
+            'https://tse3.mm.bing.net/th/id/OIP.aJ4VKK2ohav-CmqsHPcq-wAAAA?rs=1&pid=ImgDetMain&o=7&rm=3',
         'nome': 'Ana Paula Costa',
         'idade': 28,
         'especialidade': 'Ginecologia',
@@ -115,7 +113,7 @@ class PacientesController extends GetxController with LoaderManager {
       },
       {
         'image':
-            'https://api.dicebear.com/7.x/avataaars/svg?seed=Pedro&backgroundColor=c0aede',
+            'https://cdn.folhape.com.br/upload/dn_arquivo/2023/10/priscila-enquadramento-capa_2.jpg',
         'nome': 'Pedro Henrique Lima',
         'idade': 35,
         'especialidade': 'Dermatologia',
@@ -145,7 +143,7 @@ class PacientesController extends GetxController with LoaderManager {
       },
       {
         'image':
-            'https://api.dicebear.com/7.x/avataaars/svg?seed=Lucia&backgroundColor=ffd5dc',
+            'https://tse2.mm.bing.net/th/id/OIP.1Qu77Ol87z6l-UWtYN73owAAAA?rs=1&pid=ImgDetMain&o=7&rm=3',
         'nome': 'Lúcia Ferreira',
         'idade': 55,
         'especialidade': 'Endocrinologia',
@@ -174,8 +172,6 @@ class PacientesController extends GetxController with LoaderManager {
         ],
       },
       {
-        'image':
-            'https://api.dicebear.com/7.x/avataaars/svg?seed=Roberto&backgroundColor=b6e3f4',
         'nome': 'Roberto Almeida',
         'idade': 40,
         'especialidade': 'Neurologia',
