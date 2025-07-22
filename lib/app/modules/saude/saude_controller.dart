@@ -6,11 +6,19 @@ class MedicoModel {
   final String nome;
   final String especialidade;
   final String crm;
+  final String? email;
+  final String? telefone;
+  final String? hospital;
+  final String? imagem;
   MedicoModel({
     required this.id,
     required this.nome,
     required this.especialidade,
     required this.crm,
+    this.email,
+    this.telefone,
+    this.hospital,
+    this.imagem,
   });
 }
 
@@ -31,7 +39,19 @@ class HospitalModel {
   final int id;
   final String nome;
   final String endereco;
-  HospitalModel({required this.id, required this.nome, required this.endereco});
+  final String? telefone;
+  final String? email;
+  final String? tipo; // Público, Privado, Filantrópico
+  final int? capacidade;
+  HospitalModel({
+    required this.id,
+    required this.nome,
+    required this.endereco,
+    this.telefone,
+    this.email,
+    this.tipo,
+    this.capacidade,
+  });
 }
 
 class SaudeController extends GetxController {
@@ -39,15 +59,132 @@ class SaudeController extends GetxController {
   List<MedicoModel> medicos = [
     MedicoModel(
       id: 1,
-      nome: 'Dra. Ana Silva',
+      nome: 'Dra. Ana Silva Santos',
       especialidade: 'Cardiologia',
-      crm: '12345',
+      crm: '12345-SP',
+      email: 'ana.silva@hospital.com.br',
+      telefone: '(11) 99999-1111',
+      hospital: 'Hospital Municipal Dr. José Silva',
+      imagem:
+          'https://tse1.mm.bing.net/th/id/OIP.kyOMNre86zlzL_UNjISJlQHaKv?rs=1&pid=ImgDetMain&o=7&rm=3',
     ),
     MedicoModel(
       id: 2,
-      nome: 'Dr. João Souza',
+      nome: 'Dr. João Carlos Souza',
       especialidade: 'Pediatria',
-      crm: '67890',
+      crm: '67890-SP',
+      email: 'joao.souza@hospital.com.br',
+      telefone: '(11) 99999-2222',
+      hospital: 'Hospital Regional Santa Maria',
+      imagem:
+          'https://tse2.mm.bing.net/th/id/OIP.5dSvLyhTWRgipNT4lD0ggwHaE8?rs=1&pid=ImgDetMain&o=7&rm=3',
+    ),
+    MedicoModel(
+      id: 3,
+      nome: 'Dra. Maria Fernanda Costa',
+      especialidade: 'Ginecologia',
+      crm: '23456-SP',
+      email: 'maria.costa@hospital.com.br',
+      telefone: '(11) 99999-3333',
+      hospital: 'Hospital Santa Luzia',
+      imagem: '',
+    ),
+    MedicoModel(
+      id: 4,
+      nome: 'Dr. Roberto Almeida Lima',
+      especialidade: 'Ortopedia',
+      crm: '34567-SP',
+      email: 'roberto.lima@hospital.com.br',
+      telefone: '(11) 99999-4444',
+      hospital: 'Hospital Vida Nova',
+      imagem:
+          'https://tse4.mm.bing.net/th/id/OIP.uNNgdlf7m2Epc4HbXVgEuwHaHN?w=626&h=609&rs=1&pid=ImgDetMain&o=7&rm=3',
+    ),
+    MedicoModel(
+      id: 5,
+      nome: 'Dra. Juliana Pereira Rodrigues',
+      especialidade: 'Dermatologia',
+      crm: '45678-SP',
+      email: 'juliana.rodrigues@hospital.com.br',
+      telefone: '(11) 99999-5555',
+      hospital: 'Hospital São Lucas',
+      imagem:
+          'https://tse3.mm.bing.net/th/id/OIP.lXTeK9ajeQ4MKm_A6CBfygAAAA?w=398&h=591&rs=1&pid=ImgDetMain&o=7&rm=3',
+    ),
+    MedicoModel(
+      id: 6,
+      nome: 'Dr. Carlos Eduardo Mendes',
+      especialidade: 'Neurologia',
+      crm: '56789-SP',
+      email: 'carlos.mendes@hospital.com.br',
+      telefone: '(11) 99999-6666',
+      hospital: 'Hospital Beneficência Portuguesa',
+      imagem:
+          'https://tse3.mm.bing.net/th/id/OIP.-iWQZW9FPy1_BaNLL0407AAAAA?w=420&h=480&rs=1&pid=ImgDetMain&o=7&rm=3',
+    ),
+    MedicoModel(
+      id: 7,
+      nome: 'Dra. Patricia Oliveira Silva',
+      especialidade: 'Psiquiatria',
+      crm: '67890-SP',
+      email: 'patricia.silva@hospital.com.br',
+      telefone: '(11) 99999-7777',
+      hospital: 'Hospital Albert Einstein',
+      imagem:
+          'https://tse1.mm.bing.net/th/id/OIP.EGFjka5J-jemA7CpRm7mywHaKx?w=530&h=771&rs=1&pid=ImgDetMain&o=7&rm=3',
+    ),
+    MedicoModel(
+      id: 8,
+      nome: 'Dr. Fernando Santos Costa',
+      especialidade: 'Urologia',
+      crm: '78901-SP',
+      email: 'fernando.costa@hospital.com.br',
+      telefone: '(11) 99999-8888',
+      hospital: 'Hospital Sírio-Libanês',
+      imagem: '',
+    ),
+    MedicoModel(
+      id: 9,
+      nome: 'Dra. Camila Rodrigues Alves',
+      especialidade: 'Oftalmologia',
+      crm: '89012-SP',
+      email: 'camila.alves@hospital.com.br',
+      telefone: '(11) 99999-9999',
+      hospital: 'Hospital das Clínicas',
+      imagem:
+          'https://tse2.mm.bing.net/th/id/OIP.Zs-8zN9qmFZoWmac-icvNgHaIi?rs=1&pid=ImgDetMain&o=7&rm=3',
+    ),
+    MedicoModel(
+      id: 10,
+      nome: 'Dr. Ricardo Mendes Pereira',
+      especialidade: 'Endocrinologia',
+      crm: '90123-SP',
+      email: 'ricardo.pereira@hospital.com.br',
+      telefone: '(11) 99999-0000',
+      hospital: 'Hospital Santa Casa de Misericórdia',
+      imagem: '',
+    ),
+    MedicoModel(
+      id: 11,
+      nome: 'Dra. Beatriz Silva Costa',
+      especialidade: 'Oncologia',
+      crm: '01234-SP',
+      email: 'beatriz.costa@hospital.com.br',
+      telefone: '(11) 99999-1112',
+      hospital: 'Hospital São Camilo',
+      imagem:
+          'https://png.pngtree.com/png-vector/20240518/ourmid/pngtree-photo-of-smiling-doctor-woman-png-image_12381058.png',
+    ),
+    MedicoModel(
+      id: 12,
+      nome: 'Dr. Alexandre Costa Santos',
+      especialidade: 'Cirurgia Geral',
+      crm: '12345-SP',
+      email: 'alexandre.santos@hospital.com.br',
+      telefone: '(11) 99999-1113',
+      hospital: 'Hospital Nove de Julho',
+      imagem:
+          'https://img.imageboss.me/revista-cdn/cdn/41938/7d8429c45731acf5a27316ce946ece4f005b8947.jpg?1666045869',
     ),
   ];
   List<MedicoModel> filteredMedicos = [];
@@ -56,20 +193,74 @@ class SaudeController extends GetxController {
   final TextEditingController medicoEspecialidadeController =
       TextEditingController();
   final TextEditingController medicoCrmController = TextEditingController();
+  final TextEditingController medicoEmailController = TextEditingController();
+  final TextEditingController medicoTelefoneController =
+      TextEditingController();
+  final TextEditingController medicoHospitalController =
+      TextEditingController();
+  final TextEditingController medicoImagemController = TextEditingController();
   final TextEditingController medicoSearchController = TextEditingController();
 
   // Plantões
   List<PlantaoModel> plantoes = [
     PlantaoModel(
       id: 1,
-      medicoNome: 'Dra. Ana Silva',
+      medicoNome: 'Dra. Ana Silva Santos',
       data: '2024-06-01',
       horario: '08:00-18:00',
     ),
     PlantaoModel(
       id: 2,
-      medicoNome: 'Dr. João Souza',
+      medicoNome: 'Dr. João Carlos Souza',
       data: '2024-06-02',
+      horario: '18:00-06:00',
+    ),
+    PlantaoModel(
+      id: 3,
+      medicoNome: 'Dra. Maria Fernanda Costa',
+      data: '2024-06-03',
+      horario: '08:00-18:00',
+    ),
+    PlantaoModel(
+      id: 4,
+      medicoNome: 'Dr. Roberto Almeida Lima',
+      data: '2024-06-04',
+      horario: '18:00-06:00',
+    ),
+    PlantaoModel(
+      id: 5,
+      medicoNome: 'Dra. Juliana Pereira Rodrigues',
+      data: '2024-06-05',
+      horario: '08:00-18:00',
+    ),
+    PlantaoModel(
+      id: 6,
+      medicoNome: 'Dr. Carlos Eduardo Mendes',
+      data: '2024-06-06',
+      horario: '18:00-06:00',
+    ),
+    PlantaoModel(
+      id: 7,
+      medicoNome: 'Dra. Patricia Oliveira Silva',
+      data: '2024-06-07',
+      horario: '08:00-18:00',
+    ),
+    PlantaoModel(
+      id: 8,
+      medicoNome: 'Dr. Fernando Santos Costa',
+      data: '2024-06-08',
+      horario: '18:00-06:00',
+    ),
+    PlantaoModel(
+      id: 9,
+      medicoNome: 'Dra. Camila Rodrigues Alves',
+      data: '2024-06-09',
+      horario: '08:00-18:00',
+    ),
+    PlantaoModel(
+      id: 10,
+      medicoNome: 'Dr. Ricardo Mendes Pereira',
+      data: '2024-06-10',
       horario: '18:00-06:00',
     ),
   ];
@@ -95,27 +286,123 @@ class SaudeController extends GetxController {
   final TextEditingController hospitalNomeController = TextEditingController();
   final TextEditingController hospitalEnderecoController =
       TextEditingController();
+  final TextEditingController hospitalTelefoneController =
+      TextEditingController();
+  final TextEditingController hospitalEmailController = TextEditingController();
+  final TextEditingController hospitalTipoController = TextEditingController();
+  final TextEditingController hospitalCapacidadeController =
+      TextEditingController();
 
   List<HospitalModel> hospitais = [
     HospitalModel(
       id: 1,
-      nome: 'Hospital Municipal',
-      endereco: 'Rua Central, 100',
+      nome: 'Hospital Municipal Dr. José Silva',
+      endereco: 'Rua Central, 100 - Centro, São Paulo/SP',
+      telefone: '(11) 3333-1111',
+      email: 'contato@hospitalsilva.com.br',
+      tipo: 'Público',
+      capacidade: 150,
     ),
     HospitalModel(
       id: 2,
-      nome: 'Hospital Regional',
-      endereco: 'Av. Brasil, 200',
+      nome: 'Hospital Regional Santa Maria',
+      endereco: 'Av. Brasil, 200 - Vila Nova, São Paulo/SP',
+      telefone: '(11) 3333-2222',
+      email: 'contato@hospitalsantamaria.com.br',
+      tipo: 'Público',
+      capacidade: 200,
     ),
     HospitalModel(
       id: 3,
       nome: 'Hospital Santa Luzia',
-      endereco: 'Rua das Flores, 300',
+      endereco: 'Rua das Flores, 300 - Jardim Europa, São Paulo/SP',
+      telefone: '(11) 3333-3333',
+      email: 'contato@hospitalsantaluzia.com.br',
+      tipo: 'Privado',
+      capacidade: 80,
     ),
     HospitalModel(
       id: 4,
       nome: 'Hospital Vida Nova',
-      endereco: 'Av. das Nações, 400',
+      endereco: 'Av. das Nações, 400 - Mooca, São Paulo/SP',
+      telefone: '(11) 3333-4444',
+      email: 'contato@hospitalvidanova.com.br',
+      tipo: 'Filantrópico',
+      capacidade: 120,
+    ),
+    HospitalModel(
+      id: 5,
+      nome: 'Hospital São Lucas',
+      endereco: 'Rua São João, 500 - Santana, São Paulo/SP',
+      telefone: '(11) 3333-5555',
+      email: 'contato@hospitalsaolucas.com.br',
+      tipo: 'Privado',
+      capacidade: 100,
+    ),
+    HospitalModel(
+      id: 6,
+      nome: 'Hospital Beneficência Portuguesa',
+      endereco: 'Av. Paulista, 600 - Bela Vista, São Paulo/SP',
+      telefone: '(11) 3333-6666',
+      email: 'contato@beneficencia.com.br',
+      tipo: 'Filantrópico',
+      capacidade: 300,
+    ),
+    HospitalModel(
+      id: 7,
+      nome: 'Hospital Albert Einstein',
+      endereco: 'Av. Albert Einstein, 700 - Morumbi, São Paulo/SP',
+      telefone: '(11) 3333-7777',
+      email: 'contato@einstein.com.br',
+      tipo: 'Privado',
+      capacidade: 500,
+    ),
+    HospitalModel(
+      id: 8,
+      nome: 'Hospital Sírio-Libanês',
+      endereco: 'Rua Dona Adma Jafet, 800 - Bela Vista, São Paulo/SP',
+      telefone: '(11) 3333-8888',
+      email: 'contato@siriolibanes.com.br',
+      tipo: 'Filantrópico',
+      capacidade: 400,
+    ),
+    HospitalModel(
+      id: 9,
+      nome: 'Hospital das Clínicas',
+      endereco:
+          'Av. Dr. Enéas de Carvalho Aguiar, 900 - Cerqueira César, São Paulo/SP',
+      telefone: '(11) 3333-9999',
+      email: 'contato@hc.fm.usp.br',
+      tipo: 'Público',
+      capacidade: 800,
+    ),
+    HospitalModel(
+      id: 10,
+      nome: 'Hospital Santa Casa de Misericórdia',
+      endereco:
+          'Rua Dr. Cesário Motta Júnior, 1000 - Vila Buarque, São Paulo/SP',
+      telefone: '(11) 3333-0000',
+      email: 'contato@santacasa.com.br',
+      tipo: 'Filantrópico',
+      capacidade: 600,
+    ),
+    HospitalModel(
+      id: 11,
+      nome: 'Hospital São Camilo',
+      endereco: 'Rua Raul Pompeia, 1100 - Vila Pompeia, São Paulo/SP',
+      telefone: '(11) 3333-1112',
+      email: 'contato@saocamilo.com.br',
+      tipo: 'Filantrópico',
+      capacidade: 250,
+    ),
+    HospitalModel(
+      id: 12,
+      nome: 'Hospital Nove de Julho',
+      endereco: 'Rua Peixoto Gomide, 1200 - Cerqueira César, São Paulo/SP',
+      telefone: '(11) 3333-1113',
+      email: 'contato@9dejulho.com.br',
+      tipo: 'Privado',
+      capacidade: 180,
     ),
   ];
   List<HospitalModel> filteredHospitais = [];
@@ -135,6 +422,10 @@ class SaudeController extends GetxController {
     medicoNomeController.clear();
     medicoEspecialidadeController.clear();
     medicoCrmController.clear();
+    medicoEmailController.clear();
+    medicoTelefoneController.clear();
+    medicoHospitalController.clear();
+    medicoImagemController.clear();
     update();
   }
 
@@ -144,6 +435,10 @@ class SaudeController extends GetxController {
     medicoNomeController.text = medico.nome;
     medicoEspecialidadeController.text = medico.especialidade;
     medicoCrmController.text = medico.crm;
+    medicoEmailController.text = medico.email ?? '';
+    medicoTelefoneController.text = medico.telefone ?? '';
+    medicoHospitalController.text = medico.hospital ?? '';
+    medicoImagemController.text = medico.imagem ?? '';
     update();
   }
 
@@ -153,6 +448,10 @@ class SaudeController extends GetxController {
     medicoNomeController.clear();
     medicoEspecialidadeController.clear();
     medicoCrmController.clear();
+    medicoEmailController.clear();
+    medicoTelefoneController.clear();
+    medicoHospitalController.clear();
+    medicoImagemController.clear();
     update();
   }
 
@@ -162,6 +461,22 @@ class SaudeController extends GetxController {
       nome: medicoNomeController.text,
       especialidade: medicoEspecialidadeController.text,
       crm: medicoCrmController.text,
+      email:
+          medicoEmailController.text.isNotEmpty
+              ? medicoEmailController.text
+              : null,
+      telefone:
+          medicoTelefoneController.text.isNotEmpty
+              ? medicoTelefoneController.text
+              : null,
+      hospital:
+          medicoHospitalController.text.isNotEmpty
+              ? medicoHospitalController.text
+              : null,
+      imagem:
+          medicoImagemController.text.isNotEmpty
+              ? medicoImagemController.text
+              : null,
     );
     medicos.add(novo);
     filteredMedicos.add(novo);
@@ -177,6 +492,22 @@ class SaudeController extends GetxController {
         nome: medicoNomeController.text,
         especialidade: medicoEspecialidadeController.text,
         crm: medicoCrmController.text,
+        email:
+            medicoEmailController.text.isNotEmpty
+                ? medicoEmailController.text
+                : null,
+        telefone:
+            medicoTelefoneController.text.isNotEmpty
+                ? medicoTelefoneController.text
+                : null,
+        hospital:
+            medicoHospitalController.text.isNotEmpty
+                ? medicoHospitalController.text
+                : null,
+        imagem:
+            medicoImagemController.text.isNotEmpty
+                ? medicoImagemController.text
+                : null,
       );
       filteredMedicos = List.from(medicos);
     }

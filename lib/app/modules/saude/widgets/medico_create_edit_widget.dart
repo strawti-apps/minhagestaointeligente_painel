@@ -39,7 +39,7 @@ class MedicoCreateEditWidget extends StatelessWidget {
                 const SizedBox(height: 32),
                 AppTextFormField(
                   controller: controller.medicoNomeController,
-                  hintText: 'Nome',
+                  hintText: 'Nome Completo',
                 ),
                 const SizedBox(height: 16),
                 AppTextFormField(
@@ -49,7 +49,27 @@ class MedicoCreateEditWidget extends StatelessWidget {
                 const SizedBox(height: 16),
                 AppTextFormField(
                   controller: controller.medicoCrmController,
-                  hintText: 'CRM',
+                  hintText: 'CRM (ex: 12345-SP)',
+                ),
+                const SizedBox(height: 16),
+                AppTextFormField(
+                  controller: controller.medicoEmailController,
+                  hintText: 'Email (opcional)',
+                ),
+                const SizedBox(height: 16),
+                AppTextFormField(
+                  controller: controller.medicoTelefoneController,
+                  hintText: 'Telefone (opcional)',
+                ),
+                const SizedBox(height: 16),
+                AppTextFormField(
+                  controller: controller.medicoHospitalController,
+                  hintText: 'Hospital (opcional)',
+                ),
+                const SizedBox(height: 16),
+                AppTextFormField(
+                  controller: controller.medicoImagemController,
+                  hintText: 'URL da Imagem (opcional)',
                 ),
                 const SizedBox(height: 24),
                 Row(
