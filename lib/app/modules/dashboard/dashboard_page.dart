@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../shared/navbar/navbar_desktop_widget.dart';
-import '../../shared/navbar/navbar_mobile_widget.dart';
 import 'dashboard_controller.dart';
 import 'widgets/dashboard_role_router_widget.dart';
 
 class DashboardPage extends StatelessWidget {
   static const String route = '/dashboard';
+  static const double _mobileBreakpoint = 768; // Breakpoint mais padrão
 
   const DashboardPage({super.key});
 
@@ -42,7 +42,6 @@ class DashboardPage extends StatelessWidget {
           );
         },
       ),
-      bottomNavigationBar: NavbarMobileWidget(),
     );
   }
 }

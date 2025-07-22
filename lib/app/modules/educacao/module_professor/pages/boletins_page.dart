@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:minha_gestao_inteligente_painel/app/themes/app_colors.dart';
 
 import '../../../../shared/navbar/navbar_desktop_widget.dart';
-import '../../../../shared/navbar/navbar_mobile_widget.dart';
 import '../controllers/boletins_controller.dart';
 import '../widgets/boletim_stats_widget.dart';
 import '../widgets/boletim_widget.dart';
@@ -200,7 +199,6 @@ class BoletinsPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: const NavbarMobileWidget(),
     );
   }
 }

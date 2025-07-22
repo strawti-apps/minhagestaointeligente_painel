@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../shared/navbar/navbar_desktop_widget.dart';
-import '../../../../shared/navbar/navbar_mobile_widget.dart';
 import '../../../../themes/app_colors.dart';
 import '../controllers/material_escolar_controller.dart';
 import '../widgets/material_escolar_widget.dart';
@@ -189,7 +188,6 @@ class MaterialEscolarPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: const NavbarMobileWidget(),
     );
   }
 }

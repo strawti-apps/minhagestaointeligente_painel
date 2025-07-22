@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../shared/navbar/navbar_desktop_widget.dart';
-import '../../shared/navbar/navbar_mobile_widget.dart';
 import 'notifications_controller.dart';
 import 'widgets/notifications_list_widget.dart';
 
@@ -13,7 +12,6 @@ class NotificationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const NavbarMobileWidget(),
       body: Row(
         children: [
           const NavbarDesktopWidget(),

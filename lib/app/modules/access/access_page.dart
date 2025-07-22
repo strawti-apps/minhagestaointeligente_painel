@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../shared/navbar/navbar_desktop_widget.dart';
-import '../../shared/navbar/navbar_mobile_widget.dart';
 import 'access_controller.dart';
 import 'widgets/access_create_widget.dart';
 import 'widgets/access_header_widget.dart';
-import 'widgets/access_search_field.dart';
 import 'widgets/access_list_widget.dart';
+import 'widgets/access_search_field.dart';
 
 class AccessPage extends StatelessWidget {
   static const String route = '/access';
@@ -17,7 +16,6 @@ class AccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const NavbarMobileWidget(),
       body: Row(
         children: [
           const NavbarDesktopWidget(),
@@ -46,4 +44,4 @@ class AccessPage extends StatelessWidget {
       ),
     );
   }
-} 
+}

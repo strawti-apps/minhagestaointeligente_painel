@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../shared/navbar/navbar_desktop_widget.dart';
-import '../../shared/navbar/navbar_mobile_widget.dart';
 import 'feed_controller.dart';
 import 'widgets/feed_comments_widget.dart';
 import 'widgets/feed_header_widget.dart';
@@ -15,7 +14,7 @@ class FeedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const NavbarMobileWidget(),
+      // bottomNavigationBar: const NavbarMobileWidget(),
       body: Row(
         children: [
           const NavbarDesktopWidget(),

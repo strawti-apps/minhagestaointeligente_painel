@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../shared/navbar/navbar_desktop_widget.dart';
-import '../../../../shared/navbar/navbar_mobile_widget.dart';
 import '../../../../themes/app_colors.dart';
 import '../controllers/alunos_controller.dart';
 import '../widgets/aluno_widget.dart';
@@ -188,7 +187,6 @@ class AlunosPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: const NavbarMobileWidget(),
     );
   }
 }

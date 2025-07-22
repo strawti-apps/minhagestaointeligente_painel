@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:minha_gestao_inteligente_painel/app/themes/app_colors.dart';
 
 import '../../shared/navbar/navbar_desktop_widget.dart';
-import '../../shared/navbar/navbar_mobile_widget.dart';
 import 'educacao_controller.dart';
 import 'widgets/alunos_list_widget.dart';
 import 'widgets/escolas_list_widget.dart';
@@ -17,7 +16,7 @@ class EducacaoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const NavbarMobileWidget(),
+      // bottomNavigationBar: const NavbarMobileWidget(),
       body: Row(
         children: [
           const NavbarDesktopWidget(),

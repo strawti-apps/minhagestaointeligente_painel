@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:minha_gestao_inteligente_painel/app/themes/app_colors.dart';
 
 import '../../shared/navbar/navbar_desktop_widget.dart';
-import '../../shared/navbar/navbar_mobile_widget.dart';
 import 'saude_controller.dart';
 import 'widgets/hospital_create_edit_widget.dart';
 import 'widgets/hospital_header_widget.dart';
@@ -25,7 +24,6 @@ class SaudePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const NavbarMobileWidget(),
       body: Row(
         children: [
           const NavbarDesktopWidget(),
