@@ -7,6 +7,9 @@ import '../../modules/educacao/module_professor/pages/alunos_page.dart';
 import '../../modules/educacao/module_professor/pages/boletins_page.dart';
 import '../../modules/educacao/module_professor/pages/frequencia_aluno_page.dart';
 import '../../modules/educacao/module_professor/pages/material_escolar_page.dart';
+import '../../modules/saude/module_medico/pages/consultas_page.dart';
+import '../../modules/saude/module_medico/pages/pacientes_page.dart';
+import '../../modules/saude/module_medico/pages/receitas_page.dart';
 import '../../modules/saude/saude_page.dart';
 import '../../shared/widgets/app_logo.dart';
 import '../../themes/app_colors.dart';
@@ -148,13 +151,15 @@ class _NavbarDesktopWidgetState extends State<NavbarDesktopWidget> {
                         backgroundColor: AppColors.textPrimary.withValues(
                           alpha: 0.4,
                         ),
-                        child: Text(
-                          userType.isNotEmpty
-                              ? userType.substring(0, 1).toUpperCase()
-                              : '?',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                        child: Center(
+                          child: Text(
+                            userType.isNotEmpty
+                                ? userType.substring(0, 1).toUpperCase()
+                                : '?',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ),
@@ -222,11 +227,15 @@ List<_SidebarMenuItem> _getMenuItems(String type) {
         ),
       ];
     case 'medico':
-      return const [
-        _SidebarMenuItem('Dashboard', Icons.dashboard, '/dashboard'),
-        _SidebarMenuItem('Pacientes', Icons.people, '/pacientes'),
-        _SidebarMenuItem('Receitas', Icons.receipt_long, '/receitas'),
-        _SidebarMenuItem('Consultas', Icons.calendar_today, '/consultas'),
+      return [
+        const _SidebarMenuItem('Dashboard', Icons.dashboard, '/dashboard'),
+        _SidebarMenuItem('Pacientes', Icons.people, PacientesPage.route),
+        _SidebarMenuItem('Receitas', Icons.receipt_long, ReceitasPage.route),
+        _SidebarMenuItem(
+          'Consultas',
+          Icons.calendar_today,
+          ConsultasPage.route,
+        ),
       ];
     default:
       return [

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MedicoDashboardWidget extends StatelessWidget {
+import '../../../shared/mixins/navigation_helper.dart';
+import '../../../shared/widgets/quick_access_card.dart';
+import '../../saude/module_medico/pages/consultas_page.dart';
+import '../../saude/module_medico/pages/pacientes_page.dart';
+import '../../saude/module_medico/pages/receitas_page.dart';
+
+class MedicoDashboardWidget extends StatelessWidget with NavigationHelper {
   final bool isMobile;
   const MedicoDashboardWidget({super.key, required this.isMobile});
 
@@ -12,18 +18,21 @@ class MedicoDashboardWidget extends StatelessWidget {
         title: 'Receitas',
         description: 'Gerencie receitas',
         color: Colors.blue,
+        onTap: () => navigateWithType(ReceitasPage.route),
       ),
       _MedicoCardData(
         icon: Icons.calendar_today,
         title: 'Consultas',
         description: 'Veja suas consultas',
         color: Colors.green,
+        onTap: () => navigateWithType(ConsultasPage.route),
       ),
       _MedicoCardData(
         icon: Icons.people,
         title: 'Pacientes',
         description: 'Gerencie pacientes',
         color: Colors.deepPurple,
+        onTap: () => navigateWithType(PacientesPage.route),
       ),
     ];
 
@@ -84,18 +93,9 @@ class MedicoDashboardWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                Icons.medical_services,
-                size: isMobile ? 24 : 28,
-                color: Colors.blue,
-              ),
-              SizedBox(width: isMobile ? 8 : 12),
               Text(
-                'Dashboard Médico',
-                style: TextStyle(
-                  fontSize: isMobile ? 20 : 28,
-                  fontWeight: FontWeight.bold,
-                ),
+                'Dashboard ',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -149,13 +149,49 @@ class MedicoDashboardWidget extends StatelessWidget {
             ),
           ]),
           SizedBox(height: isMobile ? 24 : 32),
-          // Atalhos rápidos
-          Text(
-            'Acesso Rápido',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-          ),
-          SizedBox(height: 8),
-          responsiveAtalhosCards(atalhosCards),
+          if (!isMobile) ...[
+            Text(
+              'Acesso Rápido',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+            SizedBox(height: 16),
+            Card(
+              elevation: 2,
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+                side: BorderSide(color: Colors.grey.shade200, width: 1),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ...atalhosCards.map(
+                      (card) => Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: QuickAccessCard(
+                          icon: card.icon,
+                          title: card.title,
+                          description: card.description,
+                          color: card.color,
+                          onTap: card.onTap,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ] else ...[
+            // Para mobile, manter na parte inferior
+            Text(
+              'Acesso Rápido',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+            SizedBox(height: 8),
+            responsiveAtalhosCards(atalhosCards),
+          ],
         ],
       ),
     );
@@ -211,11 +247,13 @@ class _MedicoCardData {
   final String title;
   final String description;
   final Color color;
+  final void Function()? onTap;
   _MedicoCardData({
     required this.icon,
     required this.title,
     required this.description,
     required this.color,
+    this.onTap,
   });
 }
 
@@ -225,12 +263,14 @@ class _MedicoAtalhoCard extends StatelessWidget {
   final String description;
   final Color color;
   final double height;
+  final void Function()? onTap;
   const _MedicoAtalhoCard({
     required this.icon,
     required this.title,
     required this.description,
     required this.color,
     required this.height,
+    this.onTap,
   });
   @override
   Widget build(BuildContext context) {
