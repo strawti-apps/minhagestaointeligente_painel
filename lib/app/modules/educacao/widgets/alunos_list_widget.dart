@@ -5,6 +5,7 @@ import '../../../shared/widgets/app_button_default.dart';
 import '../../../shared/widgets/app_text_form_field.dart';
 import '../../../themes/app_colors.dart';
 import '../educacao_controller.dart';
+import 'aluno_card_widget.dart';
 
 class AlunosListWidget extends StatelessWidget {
   const AlunosListWidget({super.key});
@@ -39,19 +40,65 @@ class AlunosListWidget extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 32),
+
+                  // Nome do aluno
                   AppTextFormField(
                     controller: controller.alunoNomeController,
                     hintText: 'Nome do aluno',
                   ),
                   const SizedBox(height: 16),
+
+                  // Turma
                   AppTextFormField(
                     controller: controller.alunoTurmaController,
                     hintText: 'Turma',
                   ),
                   const SizedBox(height: 16),
+
+                  // Responsável
                   AppTextFormField(
                     controller: controller.alunoResponsavelController,
                     hintText: 'Responsável',
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Idade e Escola
+                  Row(
+                    children: [
+                      Expanded(
+                        child: AppTextFormField(
+                          controller: controller.alunoIdadeController,
+                          hintText: 'Idade',
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: AppTextFormField(
+                          controller: controller.alunoEscolaController,
+                          hintText: 'Escola',
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Telefone e Imagem
+                  Row(
+                    children: [
+                      Expanded(
+                        child: AppTextFormField(
+                          controller: controller.alunoTelefoneController,
+                          hintText: 'Telefone',
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: AppTextFormField(
+                          controller: controller.alunoImagemController,
+                          hintText: 'URL da imagem (opcional)',
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 24),
                   Row(
@@ -115,101 +162,16 @@ class AlunosListWidget extends StatelessWidget {
           child:
               controller.filteredAlunos.isEmpty
                   ? const Center(child: Text('Nenhum aluno encontrado.'))
-                  : SingleChildScrollView(
+                  : ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Wrap(
-                        alignment: WrapAlignment.start,
-                        children:
-                            controller.filteredAlunos.map((aluno) {
-                              return ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                  minWidth: 320,
-                                  maxWidth: 380,
-                                ),
-                                child: Card(
-                                  elevation: 2,
-                                  color: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(14),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                aluno.nome,
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ),
-                                            Row(
-                                              children: [
-                                                IconButton(
-                                                  icon: const Icon(
-                                                    Icons.edit,
-                                                    color: Colors.blue,
-                                                  ),
-                                                  onPressed:
-                                                      () => controller
-                                                          .openEditAluno(aluno),
-                                                  tooltip: 'Editar',
-                                                ),
-                                                IconButton(
-                                                  icon: const Icon(
-                                                    Icons.delete,
-                                                    color: Colors.red,
-                                                  ),
-                                                  onPressed:
-                                                      () => controller
-                                                          .deleteAluno(aluno),
-                                                  tooltip: 'Remover',
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          'Turma: ${aluno.turma}',
-                                          style: const TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.deepPurple,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          'Responsável: ${aluno.responsavel}',
-                                          style: const TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 24),
-                                        const Icon(
-                                          Icons.badge_rounded,
-                                          size: 32,
-                                          color: Colors.blueAccent,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                      ),
-                    ),
+                    itemCount: controller.filteredAlunos.length,
+                    itemBuilder: (context, index) {
+                      final aluno = controller.filteredAlunos[index];
+                      return AlunoCardWidget(
+                        aluno: aluno,
+                        controller: controller,
+                      );
+                    },
                   ),
         ),
       ],

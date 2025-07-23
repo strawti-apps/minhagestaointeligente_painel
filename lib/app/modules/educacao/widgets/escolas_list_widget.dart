@@ -5,6 +5,7 @@ import '../../../shared/widgets/app_button_default.dart';
 import '../../../shared/widgets/app_text_form_field.dart';
 import '../../../themes/app_colors.dart';
 import '../educacao_controller.dart';
+import 'escola_card_widget.dart';
 
 class EscolasListWidget extends StatelessWidget {
   const EscolasListWidget({super.key});
@@ -41,19 +42,72 @@ class EscolasListWidget extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 32),
+
+                  // Nome da escola
                   AppTextFormField(
                     controller: controller.escolaNomeController,
                     hintText: 'Nome da escola ou creche',
                   ),
                   const SizedBox(height: 16),
+
+                  // Tipo
                   AppTextFormField(
                     controller: controller.escolaTipoController,
                     hintText: 'Tipo (Escola ou Creche)',
                   ),
                   const SizedBox(height: 16),
+
+                  // Endereço
                   AppTextFormField(
                     controller: controller.escolaEnderecoController,
-                    hintText: 'Endereço',
+                    hintText: 'Endereço completo',
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Telefone e Email
+                  Row(
+                    children: [
+                      Expanded(
+                        child: AppTextFormField(
+                          controller: controller.escolaTelefoneController,
+                          hintText: 'Telefone',
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: AppTextFormField(
+                          controller: controller.escolaEmailController,
+                          hintText: 'Email',
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Capacidade e Turnos
+                  Row(
+                    children: [
+                      Expanded(
+                        child: AppTextFormField(
+                          controller: controller.escolaCapacidadeController,
+                          hintText: 'Capacidade (número de alunos)',
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: AppTextFormField(
+                          controller: controller.escolaTurnosController,
+                          hintText: 'Turnos (Matutino, Vespertino, Integral)',
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+
+                  // URL da imagem
+                  AppTextFormField(
+                    controller: controller.escolaImagemController,
+                    hintText: 'URL da imagem da escola (opcional)',
                   ),
                   const SizedBox(height: 24),
                   Row(
@@ -119,103 +173,16 @@ class EscolasListWidget extends StatelessWidget {
                   ? const Center(
                     child: Text('Nenhuma escola ou creche encontrada.'),
                   )
-                  : SingleChildScrollView(
+                  : ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Wrap(
-                        alignment: WrapAlignment.start,
-                        children:
-                            controller.filteredEscolas.map((escola) {
-                              return ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                  minWidth: 320,
-                                  maxWidth: 380,
-                                ),
-                                child: Card(
-                                  elevation: 2,
-                                  color: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(14),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                escola.nome,
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ),
-                                            Row(
-                                              children: [
-                                                IconButton(
-                                                  icon: const Icon(
-                                                    Icons.edit,
-                                                    color: Colors.blue,
-                                                  ),
-                                                  onPressed:
-                                                      () => controller
-                                                          .openEditEscola(
-                                                            escola,
-                                                          ),
-                                                  tooltip: 'Editar',
-                                                ),
-                                                IconButton(
-                                                  icon: const Icon(
-                                                    Icons.delete,
-                                                    color: Colors.red,
-                                                  ),
-                                                  onPressed:
-                                                      () => controller
-                                                          .deleteEscola(escola),
-                                                  tooltip: 'Remover',
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          escola.tipo,
-                                          style: const TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.blue,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          'Endereço: ${escola.endereco}',
-                                          style: const TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 24),
-                                        const Icon(
-                                          Icons.school,
-                                          size: 32,
-                                          color: Colors.blueAccent,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                      ),
-                    ),
+                    itemCount: controller.filteredEscolas.length,
+                    itemBuilder: (context, index) {
+                      final escola = controller.filteredEscolas[index];
+                      return EscolaCardWidget(
+                        escola: escola,
+                        controller: controller,
+                      );
+                    },
                   ),
         ),
       ],

@@ -5,6 +5,7 @@ import '../../../shared/widgets/app_button_default.dart';
 import '../../../shared/widgets/app_text_form_field.dart';
 import '../../../themes/app_colors.dart';
 import '../educacao_controller.dart';
+import 'professor_card_widget.dart';
 
 class ProfessoresListWidget extends StatelessWidget {
   const ProfessoresListWidget({super.key});
@@ -41,19 +42,66 @@ class ProfessoresListWidget extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 32),
+
+                  // Nome do professor
                   AppTextFormField(
                     controller: controller.professorNomeController,
                     hintText: 'Nome do professor',
                   ),
                   const SizedBox(height: 16),
+
+                  // Disciplina
                   AppTextFormField(
                     controller: controller.professorDisciplinaController,
                     hintText: 'Disciplina',
                   ),
                   const SizedBox(height: 16),
+
+                  // Email
                   AppTextFormField(
                     controller: controller.professorEmailController,
                     hintText: 'Email',
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Telefone e Escola
+                  Row(
+                    children: [
+                      Expanded(
+                        child: AppTextFormField(
+                          controller: controller.professorTelefoneController,
+                          hintText: 'Telefone',
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: AppTextFormField(
+                          controller: controller.professorEscolaController,
+                          hintText: 'Escola',
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Especialidade e Imagem
+                  Row(
+                    children: [
+                      Expanded(
+                        child: AppTextFormField(
+                          controller:
+                              controller.professorEspecialidadeController,
+                          hintText: 'Especialidade',
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: AppTextFormField(
+                          controller: controller.professorImagemController,
+                          hintText: 'URL da imagem (opcional)',
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 24),
                   Row(
@@ -117,99 +165,16 @@ class ProfessoresListWidget extends StatelessWidget {
           child:
               controller.filteredProfessores.isEmpty
                   ? const Center(child: Text('Nenhum professor encontrado.'))
-                  : SingleChildScrollView(
+                  : ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Wrap(
-                        children:
-                            controller.filteredProfessores.map((prof) {
-                              return ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                  minWidth: 320,
-                                  maxWidth: 380,
-                                ),
-                                child: Card(
-                                  elevation: 2,
-                                  color: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(14),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                prof.nome,
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ),
-                                            Row(
-                                              children: [
-                                                IconButton(
-                                                  icon: const Icon(
-                                                    Icons.edit,
-                                                    color: Colors.green,
-                                                  ),
-                                                  onPressed:
-                                                      () => controller
-                                                          .openEditProfessor(
-                                                            prof,
-                                                          ),
-                                                  tooltip: 'Editar',
-                                                ),
-                                                IconButton(
-                                                  icon: const Icon(
-                                                    Icons.delete,
-                                                    color: Colors.red,
-                                                  ),
-                                                  onPressed:
-                                                      () => controller
-                                                          .deleteProfessor(
-                                                            prof,
-                                                          ),
-                                                  tooltip: 'Remover',
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          'Disciplina: ${prof.disciplina}',
-                                          style: const TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.green,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          'Email: ${prof.email}',
-                                          style: const TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 24),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                      ),
-                    ),
+                    itemCount: controller.filteredProfessores.length,
+                    itemBuilder: (context, index) {
+                      final prof = controller.filteredProfessores[index];
+                      return ProfessorCardWidget(
+                        professor: prof,
+                        controller: controller,
+                      );
+                    },
                   ),
         ),
       ],
