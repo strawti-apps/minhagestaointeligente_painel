@@ -35,6 +35,7 @@ class BoletimCaptureWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Cabeçalho com foto, nome e média
           Row(
             children: [
               ClipOval(
@@ -69,7 +70,6 @@ class BoletimCaptureWidget extends StatelessWidget {
                         fontSize: 20,
                         color: AppColors.textPrimary,
                         fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.none,
                       ),
                     ),
                     Text(
@@ -78,7 +78,6 @@ class BoletimCaptureWidget extends StatelessWidget {
                         fontSize: 16,
                         color: _getMediaColor(mediaGeral),
                         fontWeight: FontWeight.w600,
-                        decoration: TextDecoration.none,
                       ),
                     ),
                   ],
@@ -92,42 +91,10 @@ class BoletimCaptureWidget extends StatelessWidget {
           // Tabela de notas
           DataTable(
             columns: const [
-              DataColumn(
-                label: Text(
-                  'Matéria',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1A1A1A),
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Notas',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1A1A1A),
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Média',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1A1A1A),
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Status',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1A1A1A),
-                  ),
-                ),
-              ),
+              DataColumn(label: Text('Matéria')),
+              DataColumn(label: Text('Notas')),
+              DataColumn(label: Text('Média')),
+              DataColumn(label: Text('Status')),
             ],
             rows:
                 boletim.entries.map((entry) {

@@ -39,7 +39,7 @@ class MaterialEscolarPage extends StatelessWidget {
                     alignment: WrapAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Material Escolar',
+                        'Material',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -60,7 +60,7 @@ class MaterialEscolarPage extends StatelessWidget {
                               controller: controller.searchController,
                               onChanged: controller.searchMateriais,
                               decoration: InputDecoration(
-                                hintText: 'Buscar por material...',
+                                hintText: 'Buscar por título ou disciplina...',
                                 prefixIcon: const Icon(Icons.search),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
@@ -83,16 +83,44 @@ class MaterialEscolarPage extends StatelessWidget {
                                     child: Text('Todas as categorias'),
                                   ),
                                   const PopupMenuItem(
-                                    value: 'papelaria',
-                                    child: Text('Papelaria'),
+                                    value: 'apostila',
+                                    child: Text('Apostila'),
                                   ),
                                   const PopupMenuItem(
-                                    value: 'artes',
-                                    child: Text('Artes'),
+                                    value: 'exercícios',
+                                    child: Text('Exercícios'),
                                   ),
                                   const PopupMenuItem(
-                                    value: 'escritório',
-                                    child: Text('Escritório'),
+                                    value: 'resumo',
+                                    child: Text('Resumo'),
+                                  ),
+                                  const PopupMenuItem(
+                                    value: 'apresentação',
+                                    child: Text('Apresentação'),
+                                  ),
+                                  const PopupMenuItem(
+                                    value: 'avaliação',
+                                    child: Text('Avaliação'),
+                                  ),
+                                  const PopupMenuItem(
+                                    value: 'mapa mental',
+                                    child: Text('Mapa Mental'),
+                                  ),
+                                  const PopupMenuItem(
+                                    value: 'vocabulário',
+                                    child: Text('Vocabulário'),
+                                  ),
+                                  const PopupMenuItem(
+                                    value: 'experimento',
+                                    child: Text('Experimento'),
+                                  ),
+                                  const PopupMenuItem(
+                                    value: 'técnica',
+                                    child: Text('Técnica'),
+                                  ),
+                                  const PopupMenuItem(
+                                    value: 'fórmulas',
+                                    child: Text('Fórmulas'),
                                   ),
                                 ],
                             child: Container(
@@ -152,6 +180,14 @@ class MaterialEscolarPage extends StatelessWidget {
                                   'Nenhum material encontrado',
                                   style: TextStyle(
                                     fontSize: 18,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  'Tente ajustar os filtros ou a busca',
+                                  style: TextStyle(
+                                    fontSize: 14,
                                     color: Colors.grey,
                                   ),
                                 ),

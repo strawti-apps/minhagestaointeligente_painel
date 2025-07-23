@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:minha_gestao_inteligente_painel/app/shared/widgets/app_button_default.dart';
 import 'package:minha_gestao_inteligente_painel/app/themes/app_colors.dart';
+
+import '../controllers/material_escolar_controller.dart';
 
 class MaterialEscolarWidget extends StatelessWidget {
   final Map<String, dynamic> materialData;
@@ -13,10 +17,16 @@ class MaterialEscolarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String nome = materialData['nome'] ?? '';
-    final int quantidade = materialData['quantidade'] ?? 0;
+    final String titulo = materialData['titulo'] ?? '';
+    final String descricao = materialData['descricao'] ?? '';
+    final String disciplina = materialData['disciplina'] ?? '';
     final String categoria = materialData['categoria'] ?? '';
-    final String fornecedor = materialData['fornecedor'] ?? '';
+    final String tamanho = materialData['tamanho'] ?? '';
+    final int downloads = materialData['downloads'] ?? 0;
+    final int visualizacoes = materialData['visualizacoes'] ?? 0;
+    final Color cor = materialData['cor'] ?? Colors.grey;
+
+    final controller = Get.find<MaterialEscolarController>();
 
     return Card(
       elevation: 2,
@@ -26,7 +36,7 @@ class MaterialEscolarWidget extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(12),
         child: Container(
-          width: 280,
+          width: 320,
           color: AppColors.background,
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -38,12 +48,12 @@ class MaterialEscolarWidget extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColors.textSecondary.withValues(alpha: 0.1),
+                      color: cor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
-                      _getMaterialIcon(nome),
-                      color: AppColors.textPrimary,
+                      _getCategoriaIcon(categoria),
+                      color: cor,
                       size: 24,
                     ),
                   ),
@@ -53,7 +63,7 @@ class MaterialEscolarWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          nome,
+                          titulo,
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -63,10 +73,10 @@ class MaterialEscolarWidget extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          categoria,
+                          disciplina,
                           style: TextStyle(
                             fontSize: 12,
-                            color: _getCategoriaColor(categoria),
+                            color: cor,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -76,105 +86,104 @@ class MaterialEscolarWidget extends StatelessWidget {
                 ],
               ),
 
-              const SizedBox(height: 16),
+              const SizedBox(height: 12),
 
-              // Informações do material
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade50,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.grey.shade200),
+              // Descrição
+              Text(
+                descricao,
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: AppColors.textSecondary,
                 ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Quantidade:',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: _getQuantidadeColor(quantidade),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Text(
-                            quantidade.toString(),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.business,
-                          size: 16,
-                          color: Colors.grey,
-                        ),
-                        const SizedBox(width: 4),
-                        Expanded(
-                          child: Text(
-                            fornecedor,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey.shade600,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
 
               const SizedBox(height: 12),
 
-              // Status do estoque
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: _getStatusColor(quantidade).withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(6),
-                  border: Border.all(
-                    color: _getStatusColor(quantidade).withValues(alpha: 0.3),
+              // Informações do material
+              Card(
+                color: AppColors.card,
+                elevation: 1.5,
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Categoria:',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: cor,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              categoria,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.storage,
+                            size: 16,
+                            color: Colors.grey,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            tamanho,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                child: Row(
-                  children: [
-                    Icon(
-                      _getStatusIcon(quantidade),
-                      size: 16,
-                      color: _getStatusColor(quantidade),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: AppButtonDefault(
+                      onTap: () => controller.visualizarPDF(materialData),
+                      text: 'Abrir PDF',
+                      paddingVertical: 4,
+                      borderColor: AppColors.primaryDark,
+                      textColor: AppColors.primaryDark,
+                      buttonColor: AppColors.card,
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        _getStatusText(quantidade),
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: _getStatusColor(quantidade),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: AppButtonDefault(
+                      onTap: () => controller.baixarMaterial(materialData),
+                      text: 'Baixar',
+                      buttonColor: AppColors.primaryDark,
+                      paddingVertical: 4,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -183,66 +192,36 @@ class MaterialEscolarWidget extends StatelessWidget {
     );
   }
 
-  IconData _getMaterialIcon(String nome) {
-    final nomeLower = nome.toLowerCase();
-
-    if (nomeLower.contains('caderno')) return Icons.book;
-    if (nomeLower.contains('lápis') || nomeLower.contains('lapis'))
-      return Icons.edit;
-    if (nomeLower.contains('borracha')) return Icons.auto_fix_high;
-    if (nomeLower.contains('caneta')) return Icons.edit_note;
-    if (nomeLower.contains('régua') || nomeLower.contains('regua'))
-      return Icons.straighten;
-    if (nomeLower.contains('cola')) return Icons.attach_file;
-    if (nomeLower.contains('tesoura')) return Icons.content_cut;
-    if (nomeLower.contains('apontador')) return Icons.create;
-    if (nomeLower.contains('papel')) return Icons.description;
-    if (nomeLower.contains('giz')) return Icons.brush;
-    if (nomeLower.contains('marcador')) return Icons.highlight;
-    if (nomeLower.contains('cartolina')) return Icons.art_track;
-
-    return Icons.school;
-  }
-
-  Color _getCategoriaColor(String categoria) {
+  IconData _getCategoriaIcon(String categoria) {
     switch (categoria.toLowerCase()) {
-      case 'papelaria':
-        return Colors.blue;
-      case 'artes':
-        return Colors.purple;
-      case 'escritório':
-      case 'escritorio':
-        return Colors.green;
+      case 'apostila':
+        return Icons.book;
+      case 'exercícios':
+      case 'exercicios':
+        return Icons.assignment;
+      case 'resumo':
+        return Icons.summarize;
+      case 'apresentação':
+      case 'apresentacao':
+        return Icons.slideshow;
+      case 'avaliação':
+      case 'avaliacao':
+        return Icons.quiz;
+      case 'mapa mental':
+        return Icons.psychology;
+      case 'vocabulário':
+      case 'vocabulario':
+        return Icons.translate;
+      case 'experimento':
+        return Icons.science;
+      case 'técnica':
+      case 'tecnica':
+        return Icons.tips_and_updates;
+      case 'fórmulas':
+      case 'formulas':
+        return Icons.functions;
       default:
-        return Colors.grey;
+        return Icons.school;
     }
-  }
-
-  Color _getQuantidadeColor(int quantidade) {
-    if (quantidade >= 50) return Colors.green;
-    if (quantidade >= 20) return Colors.orange;
-    if (quantidade >= 10) return Colors.blue;
-    return Colors.red;
-  }
-
-  Color _getStatusColor(int quantidade) {
-    if (quantidade >= 50) return Colors.green;
-    if (quantidade >= 20) return Colors.orange;
-    if (quantidade >= 10) return Colors.blue;
-    return Colors.red;
-  }
-
-  IconData _getStatusIcon(int quantidade) {
-    if (quantidade >= 50) return Icons.check_circle;
-    if (quantidade >= 20) return Icons.warning;
-    if (quantidade >= 10) return Icons.info;
-    return Icons.error;
-  }
-
-  String _getStatusText(int quantidade) {
-    if (quantidade >= 50) return 'Estoque alto';
-    if (quantidade >= 20) return 'Estoque adequado';
-    if (quantidade >= 10) return 'Estoque baixo';
-    return 'Estoque crítico';
   }
 }
