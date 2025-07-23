@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../shared/widgets/app_button_default.dart';
@@ -59,6 +61,10 @@ class HospitalCreateEditWidget extends StatelessWidget {
                       child: AppTextFormField(
                         controller: controller.hospitalTelefoneController,
                         hintText: 'Telefone',
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          TelefoneInputFormatter(),
+                        ],
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -86,6 +92,9 @@ class HospitalCreateEditWidget extends StatelessWidget {
                       child: AppTextFormField(
                         controller: controller.hospitalCapacidadeController,
                         hintText: 'Capacidade (número de leitos)',
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
                       ),
                     ),
                   ],

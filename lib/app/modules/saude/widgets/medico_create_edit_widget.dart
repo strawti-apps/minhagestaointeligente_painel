@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:minha_gestao_inteligente_painel/app/shared/widgets/app_text_form_field.dart';
 import 'package:minha_gestao_inteligente_painel/app/themes/app_colors.dart';
@@ -60,6 +62,10 @@ class MedicoCreateEditWidget extends StatelessWidget {
                 AppTextFormField(
                   controller: controller.medicoTelefoneController,
                   hintText: 'Telefone (opcional)',
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    TelefoneInputFormatter(),
+                  ],
                 ),
                 const SizedBox(height: 16),
                 AppTextFormField(

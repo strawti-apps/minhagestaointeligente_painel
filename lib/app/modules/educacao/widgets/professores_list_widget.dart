@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../shared/widgets/app_button_default.dart';
@@ -71,6 +73,10 @@ class ProfessoresListWidget extends StatelessWidget {
                         child: AppTextFormField(
                           controller: controller.professorTelefoneController,
                           hintText: 'Telefone',
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            TelefoneInputFormatter(),
+                          ],
                         ),
                       ),
                       const SizedBox(width: 16),

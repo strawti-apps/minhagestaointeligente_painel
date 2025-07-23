@@ -31,8 +31,64 @@
 
   <title>minha_gestao_inteligente_painel</title>
   <link rel="manifest" href="manifest.json">
+  <style>
+    * {
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+  
+    a {
+      text-decoration: none !important;
+      color: inherit !important;
+    }
+  </style>
+  
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
+  
+  <!-- Funções JavaScript para download e abertura de PDFs -->
+  <script>
+    // Função para forçar download de arquivos
+    window.forceDownload = function(url, filename) {
+      return new Promise((resolve, reject) => {
+        try {
+          fetch(url)
+            .then(response => response.blob())
+            .then(blob => {
+              const url = window.URL.createObjectURL(blob);
+              const link = document.createElement('a');
+              link.href = url;
+              link.download = filename;
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+              window.URL.revokeObjectURL(url);
+              resolve(true);
+            })
+            .catch(error => {
+              console.error('Erro no download:', error);
+              reject(error);
+            });
+        } catch (error) {
+          console.error('Erro no download:', error);
+          reject(error);
+        }
+      });
+    };
+
+    // Função para abrir URL em nova aba
+    window.openInNewTab = function(url) {
+      try {
+        window.open(url, '_blank');
+        return true;
+      } catch (error) {
+        console.error('Erro ao abrir nova aba:', error);
+        return false;
+      }
+    };
+  </script>
 </body>
 </html>

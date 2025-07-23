@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../shared/widgets/app_button_default.dart';
@@ -69,6 +71,9 @@ class AlunosListWidget extends StatelessWidget {
                         child: AppTextFormField(
                           controller: controller.alunoIdadeController,
                           hintText: 'Idade',
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -89,6 +94,10 @@ class AlunosListWidget extends StatelessWidget {
                         child: AppTextFormField(
                           controller: controller.alunoTelefoneController,
                           hintText: 'Telefone',
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            TelefoneInputFormatter(),
+                          ],
                         ),
                       ),
                       const SizedBox(width: 16),

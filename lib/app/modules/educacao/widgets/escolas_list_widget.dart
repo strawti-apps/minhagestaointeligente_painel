@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../shared/widgets/app_button_default.dart';
@@ -71,6 +73,10 @@ class EscolasListWidget extends StatelessWidget {
                         child: AppTextFormField(
                           controller: controller.escolaTelefoneController,
                           hintText: 'Telefone',
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            TelefoneInputFormatter(),
+                          ],
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -91,6 +97,9 @@ class EscolasListWidget extends StatelessWidget {
                         child: AppTextFormField(
                           controller: controller.escolaCapacidadeController,
                           hintText: 'Capacidade (número de alunos)',
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
                         ),
                       ),
                       const SizedBox(width: 16),
