@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:minha_gestao_inteligente_painel/app/shared/widgets/app_button_default.dart';
 
+import '../../../../infra/services/screenshot_service.dart';
 import '../../../../themes/app_colors.dart';
+import '../widgets/boletim_capture_widget.dart';
 
 class BoletinsController extends GetxController {
   final TextEditingController searchController = TextEditingController();
+  final GlobalKey boletimKey = GlobalKey();
   List<Map<String, dynamic>> _filteredBoletins = [];
   String _currentFilter = 'todos';
   String _searchQuery = '';
@@ -411,158 +415,184 @@ class BoletinsController extends GetxController {
   /// Mostrar detalhes do boletim
   void showBoletimDetails(Map<String, dynamic> boletim) {
     final String aluno = boletim['aluno'];
+    final String image = boletim['image'];
     final Map<String, dynamic> materias = boletim['boletim'];
     final double mediaGeral = _calculateMediaGeral(boletim);
 
     Get.dialog(
-      Dialog(
-        child: Container(
-          width: 600,
-          decoration: BoxDecoration(
-            color: AppColors.background,
-            borderRadius: BorderRadius.circular(15),
-          ),
-
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Cabeçalho
-              Row(
-                children: [
-                  const Icon(Icons.assignment, size: 32, color: Colors.blue),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Boletim de $aluno',
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Média Geral: ${mediaGeral.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: _getMediaColor(mediaGeral),
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () => Get.back(),
-                    icon: const Icon(Icons.close),
-                  ),
-                ],
+      Stack(
+        children: [
+          Dialog(
+            child: Container(
+              width: 600,
+              decoration: BoxDecoration(
+                color: AppColors.background,
+                borderRadius: BorderRadius.circular(15),
               ),
 
-              const SizedBox(height: 20),
-
-              // Tabela de notas
-              Flexible(
-                child: SingleChildScrollView(
-                  child: DataTable(
-                    columns: const [
-                      DataColumn(label: Text('Matéria')),
-                      DataColumn(label: Text('Notas')),
-                      DataColumn(label: Text('Média')),
-                      DataColumn(label: Text('Status')),
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Cabeçalho
+                  Row(
+                    children: [
+                      ClipOval(
+                        child: Image.network(
+                          image,
+                          height: 50,
+                          width: 50,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return CircleAvatar(
+                              radius: 25,
+                              backgroundColor: AppColors.textPrimary,
+                              child: Text(
+                                aluno.isNotEmpty ? aluno[0].toUpperCase() : 'A',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Boletim de $aluno',
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.textPrimary,
+                              ),
+                            ),
+                            Text(
+                              'Média Geral: ${mediaGeral.toStringAsFixed(2)}',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: _getMediaColor(mediaGeral),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => Get.back(),
+                        icon: const Icon(Icons.close),
+                      ),
                     ],
-                    rows:
-                        materias.entries.map((entry) {
-                          final String materia = entry.key;
-                          final Map<String, dynamic> dados = entry.value;
-                          final List<double> notas = List<double>.from(
-                            dados['notas'] ?? [],
-                          );
-                          final double media = dados['media'] ?? 0.0;
+                  ),
 
-                          return DataRow(
-                            cells: [
-                              DataCell(Text(materia)),
-                              DataCell(
-                                Text(
-                                  notas
-                                      .map((n) => n.toStringAsFixed(1))
-                                      .join(', '),
-                                ),
-                              ),
-                              DataCell(
-                                Text(
-                                  media.toStringAsFixed(2),
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: _getMediaColor(media),
-                                  ),
-                                ),
-                              ),
-                              DataCell(
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: _getMediaColor(media),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Text(
-                                    _getStatusText(media),
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
+                  const SizedBox(height: 20),
+
+                  Flexible(
+                    child: SingleChildScrollView(
+                      child: DataTable(
+                        columns: const [
+                          DataColumn(label: Text('Matéria')),
+                          DataColumn(label: Text('Notas')),
+                          DataColumn(label: Text('Média')),
+                          DataColumn(label: Text('Status')),
+                        ],
+                        rows:
+                            materias.entries.map((entry) {
+                              final String materia = entry.key;
+                              final Map<String, dynamic> dados = entry.value;
+                              final List<double> notas = List<double>.from(
+                                dados['notas'] ?? [],
+                              );
+                              final double media = dados['media'] ?? 0.0;
+
+                              return DataRow(
+                                cells: [
+                                  DataCell(Text(materia)),
+                                  DataCell(
+                                    Text(
+                                      notas
+                                          .map((n) => n.toStringAsFixed(1))
+                                          .join(', '),
                                     ),
                                   ),
-                                ),
-                              ),
-                            ],
-                          );
-                        }).toList(),
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 20),
-
-              // Botões de ação
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () => Get.back(),
-                    child: const Text(
-                      'Fechar',
-                      style: TextStyle(color: AppColors.textPrimary),
+                                  DataCell(
+                                    Text(
+                                      media.toStringAsFixed(2),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: _getMediaColor(media),
+                                      ),
+                                    ),
+                                  ),
+                                  DataCell(
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 4,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: _getMediaColor(media),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: Text(
+                                        _getStatusText(media),
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }).toList(),
+                      ),
                     ),
                   ),
-                  const SizedBox(width: 12),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      // Aqui você pode implementar a impressão ou exportação
-                      Get.snackbar(
-                        'Sucesso',
-                        'Boletim exportado com sucesso!',
-                        snackPosition: SnackPosition.BOTTOM,
-                      );
-                    },
-                    icon: const Icon(Icons.print),
-                    label: const Text(
-                      'Imprimir',
-                      style: TextStyle(color: AppColors.textPrimary),
-                    ),
+
+                  const SizedBox(height: 20),
+
+                  // Botões de ação
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () => Get.back(),
+                        child: const Text(
+                          'Fechar',
+                          style: TextStyle(color: AppColors.textPrimary),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      AppButtonDefault(
+                        onTap: () => _handleShareAction(boletim),
+                        icon: Icons.download,
+                        text: 'Baixar Boletim',
+                        width: 150,
+                        paddingVertical: 5,
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+
+          Positioned(
+            left: -10000,
+            top: -10000,
+            child: RepaintBoundary(
+              key: boletimKey,
+              child: BoletimCaptureWidget(boletimData: boletim),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -579,5 +609,34 @@ class BoletinsController extends GetxController {
     if (media >= 7.0) return 'Bom';
     if (media >= 6.0) return 'Regular';
     return 'Baixo';
+  }
+
+  /// Manipula as ações de compartilhamento
+  void _handleShareAction(Map<String, dynamic> boletim) async {
+    final String aluno = boletim['aluno'];
+    final String filename =
+        'boletim_${aluno.replaceAll(' ', '_')}_${DateTime.now().millisecondsSinceEpoch}.png';
+
+    try {
+      // Criar o widget de captura
+      final captureWidget = BoletimCaptureWidget(boletimData: boletim);
+
+      await ScreenshotService.captureWidget(boletimKey, filename);
+      Get.snackbar(
+        'Sucesso',
+        'Screenshot do boletim salvo!',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+    } catch (e) {
+      Get.snackbar(
+        'Erro',
+        'Erro ao capturar boletim: $e',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
   }
 }
