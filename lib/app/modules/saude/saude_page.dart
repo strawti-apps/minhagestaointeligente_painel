@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:minha_gestao_inteligente_painel/app/themes/app_colors.dart';
 
 import '../../shared/navbar/navbar_desktop_widget.dart';
 import 'saude_controller.dart';
+import 'widgets/hospital_card_widget.dart';
 import 'widgets/hospital_create_edit_widget.dart';
 import 'widgets/hospital_header_widget.dart';
 import 'widgets/medico_create_edit_widget.dart';
@@ -41,44 +41,9 @@ class SaudePage extends StatelessWidget {
                             itemBuilder: (context, index) {
                               final hospital =
                                   controller.filteredHospitais[index];
-                              return Card(
-                                elevation: 2,
-                                color: AppColors.card,
-                                margin: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
-                                ),
-                                child: ListTile(
-                                  title: Text(hospital.nome),
-                                  subtitle: Text(hospital.endereco),
-                                  trailing: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      IconButton(
-                                        icon: const Icon(
-                                          Icons.edit,
-                                          color: Colors.blue,
-                                        ),
-                                        onPressed:
-                                            () => controller.goToEditHospital(
-                                              hospital,
-                                            ),
-                                        tooltip: 'Editar',
-                                      ),
-                                      IconButton(
-                                        icon: const Icon(
-                                          Icons.delete,
-                                          color: Colors.red,
-                                        ),
-                                        onPressed:
-                                            () => controller.deleteHospital(
-                                              hospital,
-                                            ),
-                                        tooltip: 'Remover',
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                              return HospitalCardWidget(
+                                hospital: hospital,
+                                controller: controller,
                               );
                             },
                           ),

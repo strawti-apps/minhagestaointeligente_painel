@@ -43,6 +43,7 @@ class HospitalModel {
   final String? email;
   final String? tipo; // Público, Privado, Filantrópico
   final int? capacidade;
+  final String? imagem;
   HospitalModel({
     required this.id,
     required this.nome,
@@ -51,6 +52,7 @@ class HospitalModel {
     this.email,
     this.tipo,
     this.capacidade,
+    this.imagem,
   });
 }
 
@@ -322,6 +324,8 @@ class SaudeController extends GetxController {
   final TextEditingController hospitalTipoController = TextEditingController();
   final TextEditingController hospitalCapacidadeController =
       TextEditingController();
+  final TextEditingController hospitalImagemController =
+      TextEditingController();
 
   List<HospitalModel> hospitais = [
     HospitalModel(
@@ -332,6 +336,8 @@ class SaudeController extends GetxController {
       email: 'contato@hospitalsilva.com.br',
       tipo: 'Público',
       capacidade: 150,
+      imagem:
+          'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=400&h=300&fit=crop',
     ),
     HospitalModel(
       id: 2,
@@ -341,6 +347,8 @@ class SaudeController extends GetxController {
       email: 'contato@hospitalsantamaria.com.br',
       tipo: 'Público',
       capacidade: 200,
+      imagem:
+          'https://tse4.mm.bing.net/th/id/OIP.FeVT86LNu5197dsXjDUmiwHaED?w=593&h=325&rs=1&pid=ImgDetMain&o=7&rm=3',
     ),
     HospitalModel(
       id: 3,
@@ -350,6 +358,8 @@ class SaudeController extends GetxController {
       email: 'contato@hospitalsantaluzia.com.br',
       tipo: 'Privado',
       capacidade: 80,
+      imagem:
+          'https://th.bing.com/th/id/R.b9b2c6e78238f5794b9bbd18a8e212f0?rik=GGzOgVp6KDIIdw&riu=http%3a%2f%2fphotos.wikimapia.org%2fp%2f00%2f02%2f17%2f71%2f66_full.jpeg&ehk=bQAhZcZ0JDZWOMhCjPQdopDT%2boU2RfvqjyMzGAY%2bskc%3d&risl=&pid=ImgRaw&r=0',
     ),
     HospitalModel(
       id: 4,
@@ -359,6 +369,8 @@ class SaudeController extends GetxController {
       email: 'contato@hospitalvidanova.com.br',
       tipo: 'Filantrópico',
       capacidade: 120,
+      imagem:
+          'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop',
     ),
     HospitalModel(
       id: 5,
@@ -368,6 +380,8 @@ class SaudeController extends GetxController {
       email: 'contato@hospitalsaolucas.com.br',
       tipo: 'Privado',
       capacidade: 100,
+      imagem:
+          'https://portaldeamericana.com/wp-content/uploads/2020/12/fotor_1609341191182_copy_800x450-800x400.jpg',
     ),
     HospitalModel(
       id: 6,
@@ -377,6 +391,8 @@ class SaudeController extends GetxController {
       email: 'contato@beneficencia.com.br',
       tipo: 'Filantrópico',
       capacidade: 300,
+      imagem:
+          'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop',
     ),
     HospitalModel(
       id: 7,
@@ -386,6 +402,8 @@ class SaudeController extends GetxController {
       email: 'contato@einstein.com.br',
       tipo: 'Privado',
       capacidade: 500,
+      imagem:
+          'https://guiadoestudante.abril.com.br/wp-content/uploads/sites/4/2022/09/1649242019637_2022.04.05_e6_0001.jpg?quality=100&strip=info&w=1024&crop=1',
     ),
     HospitalModel(
       id: 8,
@@ -395,6 +413,8 @@ class SaudeController extends GetxController {
       email: 'contato@siriolibanes.com.br',
       tipo: 'Filantrópico',
       capacidade: 400,
+      imagem:
+          'https://tse2.mm.bing.net/th/id/OIP.IotpoH5enQ1SZNRS-rSDmgHaEt?rs=1&pid=ImgDetMain&o=7&rm=3',
     ),
     HospitalModel(
       id: 9,
@@ -405,6 +425,8 @@ class SaudeController extends GetxController {
       email: 'contato@hc.fm.usp.br',
       tipo: 'Público',
       capacidade: 800,
+      imagem:
+          'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=400&h=300&fit=crop',
     ),
     HospitalModel(
       id: 10,
@@ -415,6 +437,8 @@ class SaudeController extends GetxController {
       email: 'contato@santacasa.com.br',
       tipo: 'Filantrópico',
       capacidade: 600,
+      imagem:
+          'https://th.bing.com/th/id/R.87f6ebaa2285f0b7b1e3d91f044d7b12?rik=boIETx06JfSl%2bw&riu=http%3a%2f%2fviajantesemfim.com.br%2fwp-content%2fuploads%2f2019%2f08%2f67796081_685250201886566_5871890299940241408_n.jpg&ehk=9bAtS77rOqUI4NJZb740fghRI8hJX0KPOkAfeLGHGqk%3d&risl=&pid=ImgRaw&r=0',
     ),
     HospitalModel(
       id: 11,
@@ -433,6 +457,8 @@ class SaudeController extends GetxController {
       email: 'contato@9dejulho.com.br',
       tipo: 'Privado',
       capacidade: 180,
+      imagem:
+          'https://1.bp.blogspot.com/-kc6xjiXgiWc/X6QN4J1SyQI/AAAAAAAAVbg/wY9SUleEScgmcM3NQia-YvxcL30rJkWYwCPcBGAYYCw/s1024/Hospital%2BNove%2Bde%2BJulho.jpg',
     ),
   ];
   List<HospitalModel> filteredHospitais = [];
@@ -674,6 +700,11 @@ class SaudeController extends GetxController {
     hospitalToEdit = null;
     hospitalNomeController.clear();
     hospitalEnderecoController.clear();
+    hospitalTelefoneController.clear();
+    hospitalEmailController.clear();
+    hospitalTipoController.clear();
+    hospitalCapacidadeController.clear();
+    hospitalImagemController.clear();
     selectedSubModule = 'hospital_create';
     update();
   }
@@ -695,6 +726,11 @@ class SaudeController extends GetxController {
     hospitalToEdit = null;
     hospitalNomeController.clear();
     hospitalEnderecoController.clear();
+    hospitalTelefoneController.clear();
+    hospitalEmailController.clear();
+    hospitalTipoController.clear();
+    hospitalCapacidadeController.clear();
+    hospitalImagemController.clear();
     update();
   }
 
@@ -703,6 +739,26 @@ class SaudeController extends GetxController {
       id: hospitais.isNotEmpty ? hospitais.last.id + 1 : 1,
       nome: hospitalNomeController.text,
       endereco: hospitalEnderecoController.text,
+      telefone:
+          hospitalTelefoneController.text.isNotEmpty
+              ? hospitalTelefoneController.text
+              : null,
+      email:
+          hospitalEmailController.text.isNotEmpty
+              ? hospitalEmailController.text
+              : null,
+      tipo:
+          hospitalTipoController.text.isNotEmpty
+              ? hospitalTipoController.text
+              : null,
+      capacidade:
+          hospitalCapacidadeController.text.isNotEmpty
+              ? int.tryParse(hospitalCapacidadeController.text)
+              : null,
+      imagem:
+          hospitalImagemController.text.isNotEmpty
+              ? hospitalImagemController.text
+              : null,
     );
     hospitais.add(novo);
     filteredHospitais.add(novo);
@@ -713,6 +769,11 @@ class SaudeController extends GetxController {
     hospitalToEdit = hospital;
     hospitalNomeController.text = hospital.nome;
     hospitalEnderecoController.text = hospital.endereco;
+    hospitalTelefoneController.text = hospital.telefone ?? '';
+    hospitalEmailController.text = hospital.email ?? '';
+    hospitalTipoController.text = hospital.tipo ?? '';
+    hospitalCapacidadeController.text = hospital.capacidade?.toString() ?? '';
+    hospitalImagemController.text = hospital.imagem ?? '';
     selectedSubModule = 'hospital_edit';
     update();
   }
@@ -731,6 +792,26 @@ class SaudeController extends GetxController {
         id: hospitalToEdit!.id,
         nome: hospitalNomeController.text,
         endereco: hospitalEnderecoController.text,
+        telefone:
+            hospitalTelefoneController.text.isNotEmpty
+                ? hospitalTelefoneController.text
+                : null,
+        email:
+            hospitalEmailController.text.isNotEmpty
+                ? hospitalEmailController.text
+                : null,
+        tipo:
+            hospitalTipoController.text.isNotEmpty
+                ? hospitalTipoController.text
+                : null,
+        capacidade:
+            hospitalCapacidadeController.text.isNotEmpty
+                ? int.tryParse(hospitalCapacidadeController.text)
+                : null,
+        imagem:
+            hospitalImagemController.text.isNotEmpty
+                ? hospitalImagemController.text
+                : null,
       );
       filteredHospitais = List.from(hospitais);
     }

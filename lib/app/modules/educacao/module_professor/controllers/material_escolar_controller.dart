@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../infra/services/download_service/web_download_service.dart';
 import '../../../../themes/app_colors.dart';
 
 class MaterialEscolarController extends GetxController {
@@ -252,10 +253,10 @@ class MaterialEscolarController extends GetxController {
       material['downloads'] = (material['downloads'] ?? 0) + 1;
       update();
 
-      // Abrir URL diretamente para download
-      final Uri uri = Uri.parse(url);
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      // Tentar download usando o serviço web
+      final success = await WebDownloadService.forceDownload(url, arquivo);
+
+      if (success) {
         Get.snackbar(
           'Download Iniciado',
           'Baixando $titulo...',
@@ -264,13 +265,26 @@ class MaterialEscolarController extends GetxController {
           colorText: Colors.green,
         );
       } else {
-        Get.snackbar(
-          'Erro',
-          'Não foi possível baixar o arquivo',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red.withValues(alpha: 0.1),
-          colorText: Colors.red,
-        );
+        // Fallback: abrir em nova aba se o download não funcionar
+        final Uri uri = Uri.parse(url);
+        if (await canLaunchUrl(uri)) {
+          await launchUrl(uri, mode: LaunchMode.externalApplication);
+          Get.snackbar(
+            'PDF Aberto',
+            'Abrindo $titulo em nova aba para download...',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.orange.withValues(alpha: 0.1),
+            colorText: Colors.orange,
+          );
+        } else {
+          Get.snackbar(
+            'Erro',
+            'Não foi possível baixar o arquivo',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red.withValues(alpha: 0.1),
+            colorText: Colors.red,
+          );
+        }
       }
     } catch (e) {
       Get.snackbar(
